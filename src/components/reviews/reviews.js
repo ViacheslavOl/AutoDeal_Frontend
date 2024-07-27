@@ -21,7 +21,7 @@ const AppReviews = ({ auth }) => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/reviews/get');
+      const response = await axios.get(`http://78.27.236.115:8000/reviews/get`);
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews', error);
@@ -64,7 +64,7 @@ const AppReviews = ({ auth }) => {
     }
   };
 
-  const openThankYouModal = async () => {
+  const openThankYouModal = () => {
     const newErrors = {
       contactName: !contactName,
       contactDate: !contactDate,
@@ -73,21 +73,11 @@ const AppReviews = ({ auth }) => {
     setErrors(newErrors);
 
     if (contactName && contactDate && contactMessage) {
-      try {
-        await axios.post('http://localhost:8000/reviews/add', {
-          name: contactName,
-          date: contactDate,
-          text: contactMessage
-        });
-        setContactName('');
-        setContactDate('');
-        setContactMessage('');
-        setIsReviewsModalOpen(false);
-        setIsThankYouModalOpen(true);
-        fetchReviews(); // Refresh reviews after adding a new one
-      } catch (error) {
-        setErrorMessage('Ошибка отправки отзыва. Пожалуйста, попробуйте снова.');
-      }
+      setContactName('');
+      setContactDate('');
+      setContactMessage('');
+      setIsReviewsModalOpen(false);
+      setIsThankYouModalOpen(true);
     } else {
       setErrorMessage('Пожалуйста, заполните все поля.');
     }
@@ -124,7 +114,7 @@ const AppReviews = ({ auth }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/reviews/delete/${id}`, {
+      await axios.delete(`http://78.27.236.115:8000/reviews/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${auth.token}`
         }

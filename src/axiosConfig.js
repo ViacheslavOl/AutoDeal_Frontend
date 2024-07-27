@@ -1,12 +1,11 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8000',
+baseURL: 'http://78.27.236.115:8000',
   headers: {
     'Content-Type': 'application/json',
   },
 });
-
 
 instance.interceptors.response.use(
   response => response,

@@ -519,23 +519,25 @@ margin-right: 50px;
 }
 
 @media screen and (max-width: 430px) {
-
+  .heroSection-promo-year {
+    margin-right: 20px;
+  }
   .heroSection button {
     margin-left: 0;
     max-width: 300px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     height: 45px;
     font-size: 16px;
   }
   .heroSection h1 {
     font-weight: 500;
-    font-size: 22px;
-    margin-top: 60px;
+    font-size: 25px;
+    margin-top: 80px;
     margin-bottom: 20px;
   }
 
   .heroSection p {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     font-size: 17px;
   }
   .heroSection-promo-year h1, .heroSection-promo-car h1{
@@ -566,7 +568,7 @@ margin-right: 50px;
   }
   .heroSection h1 {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 22px;
     margin-top: 30px;
     margin-bottom: 20px;
   }

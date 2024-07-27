@@ -27,7 +27,7 @@ const AppCatalog = ({ auth }) => {
   useEffect(() => {
     const fetchCatalogItems = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/car/get');
+        const response = await axios.get(`http://78.27.236.115:8000car/get`);
         setCatalogItems(response.data);
       } catch (error) {
         console.error("There was an error fetching the catalog items!", error);
@@ -87,7 +87,7 @@ const AppCatalog = ({ auth }) => {
     if (selectedItem) {
       setFullscreenImages(
         [selectedItem.photo1, selectedItem.photo2, selectedItem.photo3, selectedItem.photo4, selectedItem.photo5]
-        .filter(Boolean).map(photo => `http://localhost:8000/uploads/${photo}`)
+        .filter(Boolean).map(photo => `http://78.27.236.115:8000/uploads/${photo}`)
       );
       setFullscreenImageIndex(index);
       setIsFullscreen(true);
@@ -192,7 +192,7 @@ const AppCatalog = ({ auth }) => {
 
     if (contactMethod && contactInfo && validateContactInfo()) {
       try {
-        await axios.post('http://localhost:8000/telegram/detailsCar', {
+        await axios.post(`http://78.27.236.115:8000/telegram/detailsCar`, {
           contactMethod,
           contactInfo,
           carId: selectedItem.id
@@ -218,7 +218,7 @@ const AppCatalog = ({ auth }) => {
 
     if (contactMethod && contactInfo && validateContactInfo()) {
       try {
-        await axios.post('http://localhost:8000/telegram/consultationCar', {
+        await axios.post(`http://78.27.236.115:8000/telegram/consultationCar`, {
           contactMethod,
           contactInfo,
           carId: selectedItem.id,
@@ -238,7 +238,7 @@ const AppCatalog = ({ auth }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8000/car/deleteId/${id}`, {
+      await axios.delete(`http://78.27.236.115:8000/car/deleteId/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       });
       setCatalogItems(catalogItems.filter(item => item.id !== id));
@@ -258,7 +258,7 @@ const AppCatalog = ({ auth }) => {
             <div className="catalog-content__grid-container">
               {currentItems.map(item => (
                 <div key={item.id} className="catalog__grid-item">
-                  <img src={`http://localhost:8000/uploads/${item.photo1}`} alt={item.name} onClick={() => openFullscreenImage(0, item)} />
+                  <img src={`/uploads/${item.photo1}`} alt={item.name} onClick={() => openFullscreenImage(0, item)} />
                   <h2>{item.name}</h2>
                   <h3>{item.price}</h3>
                   <div className="catalog__grid-item__icons">
@@ -332,7 +332,7 @@ const AppCatalog = ({ auth }) => {
                 selectedItem.photo3,
                 selectedItem.photo4,
                 selectedItem.photo5,
-              ].filter(Boolean).map(photo => `http://localhost:8000/uploads/${photo}`)}
+              ].filter(Boolean).map(photo => `/uploads/${photo}`)}
               openFullscreenImage={openFullscreenImage} // Передача функции
             />
             }
