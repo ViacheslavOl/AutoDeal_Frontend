@@ -13,25 +13,19 @@ const AppSelection = () => {
 
   const sendDataToServer = async (data) => {
     try {
-      const response = await fetch('/telegram/accept', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (!response.ok) {
+      const response = await axiosInstance.post('/telegram/accept', data);
+      if (response.status !== 200) {
         throw new Error('Network response was not ok');
       }
-
-      const result = await response.json();
+  
+      const result = response.data;
       return result;
     } catch (error) {
       console.error('Failed to send data to server:', error);
       return null;
     }
   };
+  
 
   const openModal = async () => {
     const newErrors = {

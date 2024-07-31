@@ -117,8 +117,7 @@ const AdminModal = ({ isOpen, onClose, auth }) => {
     }
     setLoading(true);
     try {
-      await axiosInstance.post(
-      '/users/register',
+      await axiosInstance.post('/users/register',
         { email: registerEmail, password: registerPassword },
         {
           headers: {
@@ -293,7 +292,7 @@ const AdminModal = ({ isOpen, onClose, auth }) => {
     formData.append('photo', photo);
 
     try {
-      await axios.put('/consultants/right/1', formData, {
+      await axiosInstance.put('/consultants/right/1', formData, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
           'Content-Type': 'multipart/form-data'

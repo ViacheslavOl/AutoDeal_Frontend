@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axiosInstance from '../../axiosConfig'
 import "./main.css";
 
 const AppMain = () => {
@@ -57,25 +58,20 @@ const AppMain = () => {
 
   const sendDataToServer = async (data) => {
     try {
-      const response = await fetch('/telegram/main', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (!response.ok) {
+      const response = await axiosInstance.post('/telegram/main', data);
+  
+      if (response.status !== 200) {
         throw new Error('Network response was not ok');
       }
-
-      const result = await response.json();
+  
+      const result = response.data;
       return result;
     } catch (error) {
       console.error('Failed to send data to server:', error);
       return null;
     }
   };
+  
 
   const openThankYouModal = async () => {
     const newErrors = {

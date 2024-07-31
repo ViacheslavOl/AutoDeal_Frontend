@@ -81,7 +81,6 @@ const AppCatalog = ({ auth }) => {
     document.body.classList.remove('no-scroll');
   };
 
-  // Обновленная функция для открытия полноэкранного изображения
   const openFullscreenImage = (index) => {
     if (selectedItem) {
       setFullscreenImages(
@@ -105,7 +104,6 @@ const AppCatalog = ({ auth }) => {
     setFullscreenImageIndex((prevIndex) => (prevIndex - 1 + fullscreenImages.length) % fullscreenImages.length);
   };
 
-  // Обработчики касаний для свайпа
   let touchStartX = 0;
   let touchEndX = 0;
 
@@ -119,11 +117,11 @@ const AppCatalog = ({ auth }) => {
 
   const handleTouchEnd = () => {
     if (touchStartX - touchEndX > 50) {
-      nextFullscreenSlide(); // Свайп влево, следующий слайд
+      nextFullscreenSlide(); 
     }
 
     if (touchStartX - touchEndX < -50) {
-      prevFullscreenSlide(); // Свайп вправо, предыдущий слайд
+      prevFullscreenSlide();
     }
   };
 
@@ -182,13 +180,13 @@ const AppCatalog = ({ auth }) => {
     return true;
   };
 
+
   const handleSubmit = async () => {
     const newErrors = {
       contactMethod: !contactMethod,
       contactInfo: !contactInfo || !validateContactInfo()
     };
     setErrors(newErrors);
-
     if (contactMethod && contactInfo && validateContactInfo()) {
       try {
         await axiosInstance.post('/telegram/detailsCar', {
@@ -196,6 +194,7 @@ const AppCatalog = ({ auth }) => {
           contactInfo,
           carId: selectedItem.id
         });
+  
         setContactMethod('');
         setContactInfo('');
         setIsModalOpen(false);
@@ -204,10 +203,11 @@ const AppCatalog = ({ auth }) => {
         document.body.classList.remove('no-scroll');
       } catch (error) {
         setErrorMessage('Ошибка отправки данных. Пожалуйста, попробуйте снова.');
+        console.error('Error sending details:', error); 
       }
     }
   };
-
+  
   const handleConsultationSubmit = async () => {
     const newErrors = {
       contactMethod: !contactMethod,

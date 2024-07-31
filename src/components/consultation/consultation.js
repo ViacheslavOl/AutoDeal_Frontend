@@ -47,22 +47,29 @@ const AppConsultation = () => {
         console.error('Error sending consultation data', error);
       }
     }
+  }
+
+const sendConsultationData = async () => {
+  const data = {
+    nameMethod,
+    numberMethod,
+    specialistMethod,
+    timeMethod
   };
 
-  const sendConsultationData = async () => {
-    const data = {
-      nameMethod,
-      numberMethod,
-      specialistMethod,
-      timeMethod
-    };
-
-    try {
-      await axiosInstance.post('/telegram/consultation', data);
-    } catch (error) {
-      console.error('Error sending consultation data', error);
+  try {
+    const response = await axiosInstance.post('/telegram/consultation', data);
+    if (response.status === 200) {
+      console.log('Data sent successfully:', response.data);
+    } else {
+      console.error('Unexpected response status:', response.status);
     }
-  };
+  } catch (error) {
+    console.error('Error sending consultation data:', error);
+  }
+};
+
+
 
   const closeModal = () => {
     setIsModalOpen(false);
