@@ -258,7 +258,7 @@ const AdminModal = ({ isOpen, onClose, auth }) => {
     formData.append('photo', photo);
 
     try {
-      await axios.put('/consultants/left/1', formData, {
+      await axiosInstance.put('/consultants/left/1', formData, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
           'Content-Type': 'multipart/form-data'
