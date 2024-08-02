@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../axiosConfig'
+import axios from 'axios'; 
 import './reviews.css';
 
 const AppReviews = ({ auth }) => {
@@ -21,7 +21,7 @@ const AppReviews = ({ auth }) => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axiosInstance.get('/reviews/get');
+      const response = await axios.get('https://api.bytewaves.net/reviews/get'); 
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching reviews', error);
@@ -114,7 +114,7 @@ const AppReviews = ({ auth }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axiosInstance.delete(`/reviews/delete/${id}`, {
+      await axios.delete(`https://api.bytewaves.net/reviews/delete/${id}`, { 
         headers: {
           Authorization: `Bearer ${auth.token}`
         }
