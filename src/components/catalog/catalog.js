@@ -257,7 +257,7 @@ const AppCatalog = ({ auth }) => {
             <div className="catalog-content__grid-container">
               {currentItems.map(item => (
                 <div key={item.id} className="catalog__grid-item">
-                  <img src={`/uploads/${item.photo1}`} alt={item.name} onClick={() => openFullscreenImage(0, item)} />
+                  <img src={`https://api.bytewaves.net/uploads/${item.photo1}`} alt={item.name} onClick={() => openFullscreenImage(0, item)} />
                   <h2>{item.name}</h2>
                   <h3>{item.price}</h3>
                   <div className="catalog__grid-item__icons">
@@ -332,7 +332,7 @@ const AppCatalog = ({ auth }) => {
                 selectedItem.photo4,
                 selectedItem.photo5,
               ].filter(Boolean).map(photo => `/uploads/${photo}`)}
-              openFullscreenImage={openFullscreenImage} // Передача функции
+              openFullscreenImage={openFullscreenImage} 
             />
             }
             <p className='catalog__log-number'>Номер лота: {selectedItem.lot}</p>

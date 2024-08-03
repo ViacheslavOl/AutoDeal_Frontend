@@ -130,7 +130,7 @@ const AppExperts = () => {
         <div className="experts-content__experts">
           {leftConsultant && (
             <div className="experts-content__experts-card experts-card__one">
-              <img src={`/uploads/${leftConsultant.photo}`} alt={leftConsultant.name} />
+            <img src={`https://api.bytewaves.net/uploads/${leftConsultant.photo}`}alt={leftConsultant.name} />
               <h3>{leftConsultant.name}</h3>
               <p>{leftConsultant.title}</p>
               <button onClick={() => openModal(leftConsultant)}>Связаться со мной</button>
@@ -138,7 +138,7 @@ const AppExperts = () => {
           )}
           {rightConsultant && (
             <div className="experts-content__experts-card experts-card__two">
-              <img src={`/uploads/${rightConsultant.photo}`} alt={rightConsultant.name} />
+            <img src={`https://api.bytewaves.net/uploads/${rightConsultant.photo}`} alt={rightConsultant.name} />
               <h3>{rightConsultant.name}</h3>
               <p>{rightConsultant.title}</p>
               <button onClick={() => openModal(rightConsultant)}>Связаться со мной</button>
