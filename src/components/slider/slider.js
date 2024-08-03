@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./slider.css";
 
-const Slider = ({ images, openFullscreenImage }) => {
+const Slider = ({ images, openFullscreenImage, selectedItem }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!images || images.length === 0) {
@@ -23,11 +23,9 @@ const Slider = ({ images, openFullscreenImage }) => {
         src={images[currentIndex]}
         alt={`Slide ${currentIndex}`}
         className="slider-image"
-        onClick={() => openFullscreenImage(currentIndex)} // Передача индекса
+        onClick={() => openFullscreenImage(currentIndex, selectedItem)} 
       />
       <button onClick={nextSlide} className="slider-button">{">"}</button>
     </div>
   );
 };
-
-export default Slider;

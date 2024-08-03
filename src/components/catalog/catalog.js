@@ -81,16 +81,15 @@ const AppCatalog = ({ auth }) => {
     document.body.classList.remove('no-scroll');
   };
 
-  const openFullscreenImage = (index) => {
-    if (selectedItem) {
-      setFullscreenImages(
-        [selectedItem.photo1, selectedItem.photo2, selectedItem.photo3, selectedItem.photo4, selectedItem.photo5]
-        .filter(Boolean).map(photo => `/uploads/${photo}`)
-      );
-      setFullscreenImageIndex(index);
-      setIsFullscreen(true);
-    }
+  const openFullscreenImage = (index, item) => {
+    setFullscreenImages(
+      [item.photo1, item.photo2, item.photo3, item.photo4, item.photo5]
+      .filter(Boolean).map(photo => `https://api.bytewaves.net/uploads/${photo}`)
+    );
+    setFullscreenImageIndex(index);
+    setIsFullscreen(true);
   };
+  
 
   const closeFullscreen = () => {
     setIsFullscreen(false);
@@ -325,16 +324,17 @@ const AppCatalog = ({ auth }) => {
             <button className="close-button" onClick={closeThankYouModal}>&times;</button>
             <h2>{selectedItem.name}</h2>
             {selectedItem && <Slider 
-              images={[
-                selectedItem.photo1,
-                selectedItem.photo2,
-                selectedItem.photo3,
-                selectedItem.photo4,
-                selectedItem.photo5,
-              ].filter(Boolean).map(photo => `/uploads/${photo}`)}
-              openFullscreenImage={openFullscreenImage} 
-            />
-            }
+  images={[
+    selectedItem.photo1,
+    selectedItem.photo2,
+    selectedItem.photo3,
+    selectedItem.photo4,
+    selectedItem.photo5,
+  ].filter(Boolean).map(photo => `https://api.bytewaves.net/uploads/${photo}`)}
+  openFullscreenImage={openFullscreenImage} 
+  selectedItem={selectedItem}
+/>}
+
             <p className='catalog__log-number'>Номер лота: {selectedItem.lot}</p>
             <div className='catalog__characteristics'>
               <h4>Основные характеристики:</h4>
