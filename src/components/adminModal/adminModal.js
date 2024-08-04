@@ -93,7 +93,7 @@ const AdminModal = ({ isOpen, onClose, auth }) => {
         (uri) => {
           setCarData((prevState) => ({ ...prevState, [name]: uri }));
         },
-        'blob'
+        'base64'
       );
     }
   };
