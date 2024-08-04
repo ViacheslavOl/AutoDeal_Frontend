@@ -237,13 +237,99 @@ body {
 .main-content__car-img {
   animation: slideInFromRight 1s ease-out;
 }
+@media screen and (max-width: 2400px) {
+  .main {
+    padding-top: 200px;
+  }
+  .car {
+    position: absolute;
+    top: -200px;
+    left: 90%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 100%;
+    max-width: 1500px;
+  }
+  
+  .car img {
+    width: 100%;
+    height: auto;
+  }
+  .heroSection h1 {
+    font-weight: 600;
+    font-size: 3.0125rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .heroSection p {
+    color: #ffffff;
+    margin-bottom: 60px;
+    font-weight: 400;
+    font-size: 1.85rem;
+  }
+  .heroSection-promo-year p, .heroSection-promo-car p{
+    font-size: 25px ;
+    text-align: center;
+
+  
+  }
+  .heroSection-promo-year h1, .heroSection-promo-car h1{
+    font-size: 55px ;
+    text-align: center;
+
+  }
+  .heroSection-promo{
+    margin-top: 40px;
+  }
+}
 
 @media screen and (max-width: 1720px) {
   .main {
     padding-top: 100px;
   }
   .car {
-    width: 900px;
+    position: absolute;
+    top:-100px;
+    left: 90%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 90%;
+    max-width: 1300px;
+  }
+  
+  .car img {
+    width: 100%;
+    height: auto;
+  }
+  .heroSection h1 {
+    font-weight: 600;
+    font-size: 2.8125rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .heroSection p {
+    color: #ffffff;
+    margin-bottom: 60px;
+    font-weight: 400;
+    font-size: 1.55rem;
+  }
+  .heroSection-promo-year p, .heroSection-promo-car p{
+    font-size: 20px ;
+    text-align: center;
+
+  
+  }
+  .heroSection-promo-year h1, .heroSection-promo-car h1{
+    font-size: 35px ;
+    text-align: center;
+
+  }
+  .heroSection-promo{
+    margin-top: 40px;
   }
 }
 
@@ -253,6 +339,11 @@ body {
     margin-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
+  }
+  .heroSection-promo{
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 450px;
   }
   
 }
@@ -288,6 +379,7 @@ body {
   }
   .heroSection-promo{
     margin-top: 40px;
+    margin-bottom: 30px;
     width: 450px;
   }
   .heroSection p {
@@ -432,7 +524,7 @@ body {
   }
 
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 2.825rem;
     margin-top: 30px;
     margin-bottom: 10px;
@@ -497,7 +589,7 @@ margin-left: 80px;
   }
 
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 2.425rem;
     margin-top: 50px;
     margin-bottom: 10px;
@@ -559,7 +651,7 @@ width: 70%;
   }
 
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 2.225rem;
     margin-top: 60px;
     margin-bottom: 10px;
@@ -613,7 +705,7 @@ margin-bottom: 0px;
   }
 
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.975rem;
     margin-top: 80px;
     margin-bottom: 10px;
@@ -726,7 +818,7 @@ margin-bottom: 0px;
   }
 
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.775rem;
     margin-top: 80px;
     margin-bottom: 10px;
@@ -750,7 +842,7 @@ margin-bottom: 0px;
   }
 
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.675rem;
     margin-top: 80px;
     margin-bottom: 10px;
@@ -772,7 +864,7 @@ margin-bottom: 0px;
     }
   
     .heroSection h1 {
-      font-weight: 500;
+      font-weight: 700;
       font-size: 1.675rem;
       margin-top: 80px;
       margin-bottom: 10px;
@@ -812,7 +904,7 @@ margin-bottom: 0px;
     font-size: 1rem;
   }
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.495rem;
     margin-top: 30px;
     margin-bottom: 20px;
@@ -869,7 +961,7 @@ padding-left: 0px;
 @media screen and (max-width: 432px) {
 
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.395rem;
     margin-top: 30px;
     margin-bottom: 20px;
@@ -877,7 +969,7 @@ padding-left: 0px;
   @media screen and (max-width: 410px) {
 
     .heroSection h1 {
-      font-weight: 500;
+      font-weight: 700;
       font-size: 1.295rem;
       margin-top: 30px;
       margin-bottom: 20px;
@@ -902,7 +994,7 @@ padding-left: 0px;
   @media screen and (max-width: 410px) {
 
     .heroSection h1 {
-      font-weight: 500;
+      font-weight: 700;
       font-size: 1.195rem;
       margin-top: 30px;
       margin-bottom: 20px;
@@ -921,6 +1013,7 @@ padding-left: 0px;
     .heroSection-promo-year h1, .heroSection-promo-car h1{
       font-size: 30px ;
       margin-bottom: 5px;
+
     }  
 
   }
@@ -934,7 +1027,7 @@ padding-left: 0px;
     font-size: 1rem;
   }
   .heroSection h1 {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.175rem;
     margin-top: 30px;
     margin-bottom: 20px;
@@ -948,6 +1041,7 @@ padding-left: 0px;
   }
   .heroSection-promo-year h1, .heroSection-promo-car h1 {
     font-size: 1.5625rem;
+    font-weight: 500;
   }
 
   .main__fon {
