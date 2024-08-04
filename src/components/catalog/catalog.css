@@ -8,7 +8,7 @@ padding-bottom: 60px;
   height: auto;
   max-width: 900px;
   max-height: 500px;
-  object-fit: cover; /* Масштабирование изображения с сохранением пропорций */
+  object-fit: cover;
 }
 .catalog-content{
 width: 1500px;
@@ -1485,7 +1485,7 @@ width: 100%;
 }
 
 
-/* новый ниже */
+
 .fullscreen-overlay {
   position: fixed;
   top: 0;
@@ -1512,8 +1512,8 @@ padding-bottom: 6px;
 }
 
 .fullscreen-image {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 900px;
+  max-height: 500px;
   object-fit: cover;
 }
 
