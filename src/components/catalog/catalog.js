@@ -99,6 +99,8 @@ const AppCatalog = ({ auth }) => {
     setFullscreenImageIndex((prevIndex) => (prevIndex + 1) % fullscreenImages.length);
   };
 
+
+
   const prevFullscreenSlide = () => {
     setFullscreenImageIndex((prevIndex) => (prevIndex - 1 + fullscreenImages.length) % fullscreenImages.length);
   };

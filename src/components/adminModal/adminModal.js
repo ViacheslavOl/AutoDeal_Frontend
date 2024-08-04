@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '../../axiosConfig'
+import Resizer from 'react-image-file-resizer';
 import './adminModal.css';
 
 const AdminModal = ({ isOpen, onClose, auth }) => {
@@ -80,8 +81,23 @@ const AdminModal = ({ isOpen, onClose, auth }) => {
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    setCarData({ ...carData, [name]: files[0] });
+    const file = files[0];
+    if (file) {
+      Resizer.imageFileResizer(
+        file,
+        900, 
+        500, 
+        'JPEG', 
+        70, 
+        0, 
+        (uri) => {
+          setCarData((prevState) => ({ ...prevState, [name]: uri }));
+        },
+        'blob'
+      );
+    }
   };
+  
 
   const handleReviewChange = (e) => {
     const { name, value } = e.target;
