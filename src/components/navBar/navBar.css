@@ -10,7 +10,7 @@
 }
 
 .navBar-content {
-  width: 1500px;
+  width: 1300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -117,6 +117,19 @@
 }
 .navBar__mobile{
   padding-right: 10px;
+}
+@media screen and (max-width: 1300px) {
+  .navBar-content {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+
+  .navBar__menu  p{
+font-size: 14px;
+  }
+
+
 }
 
 @media screen and (max-width: 1050px) {

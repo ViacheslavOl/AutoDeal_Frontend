@@ -122,16 +122,16 @@ margin: 0 auto;
 
 
 
- .modal-reviews__content-reviews{
+.modal-reviews__content-reviews {
   padding: 30px;
-   background-color:#F9F9F9;
-   border-radius:8px;
-   width: 750px;
-   margin: 0 auto;
-   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-   margin-bottom: 45px;
-
- }
+  background-color: #F9F9F9;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 45px;
+}
 
  
  .modal-reviews__content h2{

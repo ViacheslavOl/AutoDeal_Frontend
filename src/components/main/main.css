@@ -254,6 +254,7 @@ body {
     padding-left: 20px;
     padding-right: 20px;
   }
+  
 }
 
 @media screen and (max-width: 1289px) {
@@ -265,7 +266,7 @@ body {
   }
   .car {
     position: absolute;
-    top: 0;
+    top: -100px;
     left: 90%;
     transform: translateX(-50%);
     z-index: 1;
@@ -277,7 +278,94 @@ body {
     width: 80%;
     height: auto;
   }
+
+  .heroSection h1 {
+    font-weight: 600;
+    font-size: 2.5125rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .heroSection-promo{
+    margin-top: 40px;
+    width: 450px;
+  }
+  .heroSection p {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 1.05rem;
+  }
+  
+  .heroSection button {
+    background: linear-gradient(to right, #fd5d27 0%, #ee3c00 100%);
+    font-size: 1.1475rem;
+    font-weight: 500;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    max-width: 300px;
+    height: 50px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 10px rgba(241, 67, 12, 0.8);
+    animation: slideInFromLeft 1s ease-out, pulse 2s infinite;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .heroSection-promo p {
+    color: #ffffff;
+    margin-bottom: 0px;
+    font-weight: 400;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+  .heroSection-promo h1 {
+    color: #ffffff;
+    margin-bottom: 0px;
+    font-weight: 600;
+    font-size: 1.85rem;
+    text-align: center;
+  }
+  
 }
+@media screen and (max-width: 1189px) {
+  .main-content {
+    width: 1200px;
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .car {
+    position: absolute;
+    top: -40px;
+    left: 90%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 100%;
+    max-width: 1500px;
+  }
+  
+  .car img {
+    width: 80%;
+    height: auto;
+  }
+  .heroSection-promo p {
+    color: #ffffff;
+    margin-bottom: 0px;
+    font-weight: 400;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+  .heroSection-promo h1 {
+    color: #ffffff;
+    margin-bottom: 0px;
+    font-weight: 600;
+    font-size: 1.85rem;
+    text-align: center;
+  }
+
+}
+
 
 @media screen and (min-width: 880px) and (max-width: 1088px) {
   .main-content {
@@ -294,25 +382,58 @@ body {
     width: 250px;
   }
   .main-content__car-img {
-    left: 430px;
-    top: 70px;
+    left: 500px;
+    top: 20px;
+  }
+  .heroSection h1 {
+    font-weight: 600;
+    font-size: 2.0125rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  
+  }
+  .heroSection-promo{
+    margin-top: 20px;
+    width: 350px;
+  }
+  .heroSection p {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 1.05rem;
 
-
+  }
+  .heroSection-promo p {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+  .heroSection-promo h1 {
+    color: #ffffff;
+    margin-bottom: 0px;
+    font-weight: 600;
+    font-size: 1.85rem;
+    text-align: center;
   }
 
 }
 
 @media screen and (max-width: 879px) {
+
   .main-content {
     height: 100%;
     flex-direction: column;
     align-items: center;
     z-index: 3;
+   
   }
 
   .heroSection h1 {
     font-weight: 500;
-    font-size: 2.125rem;
+    font-size: 2.825rem;
     margin-top: 30px;
     margin-bottom: 10px;
     text-align: center;
@@ -322,29 +443,33 @@ body {
   .heroSection p {
     margin-bottom: 45px;
     text-align: center;
+    font-size: 1.325rem;
 
 
   }
   .heroSection-promo-year p, .heroSection-promo-car p{
     font-size: 25px ;
+
   
   }
   .heroSection-promo-year h1, .heroSection-promo-car h1{
-    font-size: 35px ;
+    font-size: 45px ;
 
   }
   .heroSection-promo{
-margin-top: 160px;
+margin-top: 50px;
+width: 500px;
+margin-left: 80px;
   }
 
 
   .heroSection button {
-    width: 250px;
+    width: 350px;
   }
 
   .main-content__car-img {
-    left: 300px;
-    top: 140px;
+    left: 400px;
+    top: 100px;
 
   }
 
@@ -353,6 +478,12 @@ margin-top: 160px;
     position: absolute;
     left: 50px;
     top: 50px;
+  }
+  .heroSection-img{
+    display: none;
+  }
+  .button_main_img{
+    text-align: center;
   }
 }
 
@@ -367,8 +498,8 @@ margin-top: 160px;
 
   .heroSection h1 {
     font-weight: 500;
-    font-size: 2.125rem;
-    margin-top: 30px;
+    font-size: 2.425rem;
+    margin-top: 50px;
     margin-bottom: 10px;
     text-align: center;
 
@@ -381,20 +512,23 @@ margin-top: 160px;
 
   }
   .heroSection-promo-year p, .heroSection-promo-car p{
-    font-size: 25px ;
+    font-size: 15px ;
   
   }
   .heroSection-promo-year h1, .heroSection-promo-car h1{
-    font-size: 35px ;
+    font-size: 25px ;
 
   }
   .heroSection-promo{
-margin-top: 160px;
+margin-top: 90px;
+margin-left: 70px;
+width: 70%;
+
   }
 
 
   .heroSection button {
-    width: 250px;
+    width: 450px;
   }
 
   .main-content__car-img {
@@ -411,6 +545,7 @@ margin-top: 160px;
     left: 50px;
     top: 50px;
   }
+  
 }
 
 
@@ -425,8 +560,8 @@ margin-top: 160px;
 
   .heroSection h1 {
     font-weight: 500;
-    font-size: 2.125rem;
-    margin-top: 30px;
+    font-size: 2.225rem;
+    margin-top: 60px;
     margin-bottom: 10px;
     text-align: center;
 
@@ -439,20 +574,21 @@ margin-top: 160px;
 
   }
   .heroSection-promo-year p, .heroSection-promo-car p{
-    font-size: 25px ;
+    font-size: 15px ;
   
   }
   .heroSection-promo-year h1, .heroSection-promo-car h1{
-    font-size: 35px ;
+    font-size: 25px ;
 
   }
   .heroSection-promo{
-margin-top: 160px;
+margin-top: 80px;
+margin-bottom: 0px;
   }
 
 
   .heroSection button {
-    width: 250px;
+    width: 350px;
   }
 
   .main-content__car-img {
@@ -471,15 +607,15 @@ margin-top: 160px;
 
 
 
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 596px) {
   .main-content {
     height: 100%;
   }
 
   .heroSection h1 {
     font-weight: 500;
-    font-size: 1.6875rem;
-    margin-top: 30px;
+    font-size: 1.975rem;
+    margin-top: 80px;
     margin-bottom: 10px;
   }
 
@@ -506,7 +642,7 @@ margin-top: 160px;
 
   .main-content__car-img {
     left: 300px;
-    top: 50px;
+    top: 250px;
     width: 900px;
   }
 
@@ -517,7 +653,6 @@ margin-top: 160px;
   }
   .main__fon {
     position: absolute;
-
     top: 50px;
   }
   .main__modal-content {
@@ -585,46 +720,83 @@ margin-top: 160px;
     cursor: pointer;
   }
 }
+@media screen and (max-width: 556px) {
+  .main-content {
+    height: 100%;
+  }
 
-@media screen and (max-width: 480px) {
-  .heroSection-promo-year {
-    margin-right: 20px;
-  }
-  .heroSection button {
-    margin-left: 0;
-    width: 90%;
-    max-width: 300px;
-    margin-bottom: 90px;
-    height: 45px;
-    font-size: 1rem;
-  }
   .heroSection h1 {
     font-weight: 500;
-    font-size: 1.5625rem;
-    margin-top:20px;
-    margin-bottom: 20px;
+    font-size: 1.775rem;
+    margin-top: 80px;
+    margin-bottom: 10px;
   }
 
   .heroSection p {
-    margin-bottom: 0px;
-    font-size: 1.0625rem;
-    font-weight: 500;
- 
+    margin-bottom: 20px;
   }
-  .heroSection-promo-year h1, .heroSection-promo-car h1 {
-    font-size: 1.5625rem;
+
+  .heroSection button {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 100px;
+
   }
-  .main__fon {
-    position: absolute;
-    left: -300px;
-    top: 0px;
-  }
-  .main-content__car-img {
-    left: 400px;
-    top: 0px;
-    width: 400px;
-  }
+  
 }
+@media screen and (max-width: 489px) {
+  .main-content {
+    height: 100%;
+  }
+
+  .heroSection h1 {
+    font-weight: 500;
+    font-size: 1.675rem;
+    margin-top: 80px;
+    margin-bottom: 10px;
+  }
+
+  .heroSection p {
+    margin-bottom: 20px;
+  }
+
+  .heroSection button {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 100px;
+
+  }}
+  @media screen and (max-width: 469px) {
+    .main-content {
+      height: 100%;
+    }
+  
+    .heroSection h1 {
+      font-weight: 500;
+      font-size: 1.675rem;
+      margin-top: 80px;
+      margin-bottom: 10px;
+    }
+  
+    .heroSection p {
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+  
+    .heroSection button {
+      width: 100%;
+      margin-top: 40px;
+      margin-bottom: 100px;
+  
+    }
+    .heroSection-promo {
+      width: 100%;
+      padding-left: 0px;
+          display: block;
+          margin-top: 0px;
+          margin-left: 0px;
+           }
+          }
 
 @media screen and (max-width: 442px) {
   .main-content{
@@ -641,19 +813,22 @@ margin-top: 160px;
   }
   .heroSection h1 {
     font-weight: 500;
-    font-size: 1.275rem;
+    font-size: 1.495rem;
     margin-top: 30px;
     margin-bottom: 20px;
   }
   .heroSection-promo {
-
+width: 100%;
+padding-left: 0px;
     display: block;
     margin-top: 0px;
-    margin-left: 0 auto;
+    margin-left: 0px;
      }
+
      .heroSection-promo-year{
      margin-right: 0px;
        }
+
   .heroSection p {
     margin-bottom: 20px;
     font-size: 1.0625rem;
@@ -691,6 +866,64 @@ margin-top: 160px;
   }
 }
 
+@media screen and (max-width: 432px) {
+
+  .heroSection h1 {
+    font-weight: 500;
+    font-size: 1.395rem;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }}
+  @media screen and (max-width: 410px) {
+
+    .heroSection h1 {
+      font-weight: 500;
+      font-size: 1.295rem;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .heroSection p {
+      font-weight: 500;
+      font-size: 1.095rem;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .heroSection-promo-year p, .heroSection-promo-car p{
+      font-size: 14px ;
+      margin-top: 2px;
+    
+    }
+    .heroSection-promo-year h1, .heroSection-promo-car h1{
+      font-size: 30px ;
+      margin-bottom: 5px;
+    }  
+
+  }
+  @media screen and (max-width: 410px) {
+
+    .heroSection h1 {
+      font-weight: 500;
+      font-size: 1.195rem;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .heroSection p {
+      font-weight: 500;
+      font-size: 1.095rem;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .heroSection-promo-year p, .heroSection-promo-car p{
+      font-size: 14px ;
+      margin-top: 2px;
+    
+    }
+    .heroSection-promo-year h1, .heroSection-promo-car h1{
+      font-size: 30px ;
+      margin-bottom: 5px;
+    }  
+
+  }
 @media screen and (max-width: 355px) {
   .heroSection button {
     margin-left: 0;

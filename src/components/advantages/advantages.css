@@ -3,6 +3,7 @@ margin-bottom: 80px;
 
 }
 .advantages-content {
+    position: relative;
     width: 1500px;
     margin: 0 auto;
     z-index: 1;
@@ -78,7 +79,7 @@ padding-right: 20px;
   left: 0;
   right: 0px;
   bottom: 0;
-  width: 75%;
+  width: 90%;
 }
 
 @media screen and (max-width: 1550px) {
@@ -225,6 +226,15 @@ padding-right: 20px;
             bottom: 0;
             width: 100%;
           }
+          .advantages__light {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0px;
+            bottom: 0;
+            width:100%;
+          }
 }
 
 @media screen and (max-width: 860px) {
@@ -243,6 +253,7 @@ padding-right: 20px;
         align-items: center;
     
     }
+  
     .advantages-content__grid-container{
         display: grid;
   width: 500px;
