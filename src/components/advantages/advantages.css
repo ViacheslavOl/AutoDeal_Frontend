@@ -1,12 +1,11 @@
 .advantages{
 margin-bottom: 80px;
-
+position: relative;
+z-index: 9999;
 }
 .advantages-content {
-    position: relative;
     width: 1500px;
     margin: 0 auto;
-    z-index: 1;
 
 }
 .advantages-content h1{
@@ -61,27 +60,22 @@ padding-top: 15px;
 padding-right: 20px;
 }
 
-.advantages__light-container{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
+.advantages__light-container {
+    position: relative;
     overflow: hidden;
-    pointer-events: none; 
-  }
-
-.advantages__light {
-  position: absolute;
-  pointer-events: none;
-  top: 0;
-  left: 0;
-  right: 0px;
-  bottom: 0;
-  width: 90%;
+    z-index: -1;
+    pointer-events: none;
 }
 
+.advantages__light {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: auto;
+}
 @media screen and (max-width: 1550px) {
     .advantages-content h1{
         font-size: 45px;
@@ -217,23 +211,9 @@ padding-right: 20px;
 
         }
         
-        .advantages__light {
-            position: absolute;
-            pointer-events: none;
-            top: 200px;
-            left: 0;
-            right: 0px;
-            bottom: 0;
-            width: 100%;
-          }
-          .advantages__light {
-            position: absolute;
-            pointer-events: none;
-            top: 0;
-            left: 0;
-            right: 0px;
-            bottom: 0;
-            width:100%;
+   .advantages__light {
+       width: 100%;
+            top: 150px;
           }
 }
 
@@ -286,16 +266,10 @@ margin: 0 auto;
 
 
         }
-        .advantages__light {
-            position: absolute;
-            pointer-events: none;
+   .advantages__light {
+       width: 100%;
             top: 200px;
-            left: 0;
-            right: 0px;
-            bottom: 0;
-            width: 100%;
           }
-
 }
 
 @media screen and (max-width: 730px) {
@@ -348,14 +322,9 @@ margin: 0 auto;
 
         }
      
-        .advantages__light {
-            position: absolute;
-            pointer-events: none;
+   .advantages__light {
+       width: 100%;
             top: 200px;
-            left: 0;
-            right: 0px;
-            bottom: 0;
-            width: 100%;
           }
 }
 @media screen and (max-width: 550px) {
@@ -411,16 +380,10 @@ margin: 0 auto;
 
 
         }
-        .advantages__light {
-            position: absolute;
-            pointer-events: none;
+.advantages__light {
+       width: 100%;
             top: 200px;
-            left: 0;
-            right: 0px;
-            bottom: 0;
-            width: 100%;
           }
-
 }
 
 @media screen and (max-width: 460px) {
@@ -478,14 +441,8 @@ margin: 0 auto;
             font-size: 15px;
             color:#FF4A10;
         }
-        .advantages__light {
-            position: absolute;
-            pointer-events: none;
+.advantages__light {
+       width: 100%;
             top: 200px;
-            left: 0;
-            right: 0px;
-            bottom: 0;
-            width: 100%;
           }
-
 }

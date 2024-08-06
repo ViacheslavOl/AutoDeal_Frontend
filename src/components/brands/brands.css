@@ -2,11 +2,15 @@
     background-color: white;
     height: 250px;
     width: 100%;
+ position: relative;
+    z-index: 999;
 }
 
 .brands-content{
     width: 1500px;
     margin: 0 auto;
+ position: relative;
+    z-index: 999;
 
 }
 .brands-orangLine{

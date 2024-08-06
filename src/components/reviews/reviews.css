@@ -3,6 +3,8 @@ background-color: white;
 height: auto;
 padding-bottom: 70px;
 padding-top: 100px;
+position: relative;
+z-index: 9999;
 }
     
 .reviews-content{
@@ -78,7 +80,7 @@ margin: 0 auto;
 .modal-reviews {
    display: flex;
    position: fixed;
-   z-index: 1000;
+   z-index: 99999;
    left: 0;
    top: 0;
    width: 100%;

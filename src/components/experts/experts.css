@@ -6,7 +6,7 @@ background-repeat: no-repeat;
 height: 100%;
 background-color: #212121;
 position: relative;
-z-index: 2;
+z-index: 9999;
 }
     
     .experts-content{
@@ -87,7 +87,7 @@ box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.5);
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 99999999 !important;
     left: 0;
     top: 0;
     width: 100%;
@@ -109,6 +109,7 @@ box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.5);
     position: relative;
     width: 900px;
     height: auto;
+z-index:99999999 !important;
   }
   
   .main__modal-content h2 {

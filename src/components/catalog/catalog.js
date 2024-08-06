@@ -246,19 +246,18 @@ const AppCatalog = ({ auth }) => {
       console.error("There was an error deleting the catalog item!", error);
     }
   };
-  
-  return (
+   return (
     <div id="catalog" className="catalog">
       <div className="catalog-content">
         <h1>Каталог</h1>
         {catalogItems.length === 0 ? (
           <p className='catalog__empty'>Авто отсутствуют</p>
         ) : (
-          <>
-            <div className="catalog-content__grid-container">
+<>
+             <div className="catalog-content__grid-container">
               {currentItems.map(item => (
-                <div key={item.id} className="catalog__grid-item">
-                  <img src={`https://api.bytewaves.net/uploads/${item.photo1}`} alt={item.name} onClick={() => openFullscreenImage(0, item)} />
+<div key={item.id} className="catalog__grid-item">
+<img className="catalog__grid-item__main-img" src={`https://api.bytewaves.net/uploads/${item.photo1}`} alt={item.name} onClick={() => openFullscreenImage(0, item)} />
                   <h2>{item.name}</h2>
                   <h3>{item.price}</h3>
                   <div className="catalog__grid-item__icons">

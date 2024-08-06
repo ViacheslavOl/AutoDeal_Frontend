@@ -1,10 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './navBar.css';
 import AdminModal from '../adminModal/adminModal';
 
 const AppNav = ({ auth, setAuth }) => {
   const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+
+useEffect(() => {
+    const links = document.querySelectorAll('.navBar a, .navBar__mobile-menu a');
+    links.forEach(link => {
+      link.addEventListener('click', handleAnchorClick);
+    });
+
+    return () => {
+      links.forEach(link => {
+        link.removeEventListener('click', handleAnchorClick);
+      });
+    };
+  }, []);
+
+  const handleAnchorClick = (event) => {
+    const targetId = event.currentTarget.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      event.preventDefault();
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+      if (isBurgerOpen) {
+        setIsBurgerOpen(false);
+      }
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');

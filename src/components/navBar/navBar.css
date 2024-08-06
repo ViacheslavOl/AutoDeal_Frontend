@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .navBar {
   height: 80px;
   position: fixed;
@@ -5,7 +9,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 1000; 
+  z-index: 9999999; 
   background-color: #212121;
 }
 
