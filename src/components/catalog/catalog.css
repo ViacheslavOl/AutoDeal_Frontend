@@ -3,7 +3,6 @@
   height: 100%;
   padding-bottom: 60px;
  position: relative;
-    z-index: 9999;
 }
 
 .catalog-content {
@@ -187,7 +186,7 @@ padding-top:-20px;
 .catalog-modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 99999;
   left: 0;
   top: 0;
   width: 100%;
@@ -289,7 +288,7 @@ padding-top:-20px;
 .catalog-thankyou-modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 99999;
   left: 0;
   top: 0;
   width: 100%;

@@ -15,7 +15,6 @@ body {
   padding: 150px 20px 20px 20px;
   position: relative;
   overflow: hidden;
-  z-index: 999;
 }
 
 .main-content {
@@ -114,7 +113,7 @@ body {
 .modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 99999;
   left: 0;
   top: 0;
   width: 100%;
@@ -129,6 +128,7 @@ body {
 }
 
 .main__modal-content {
+  z-index: 9999;
   text-align: center;
   background-color: white;
   padding: 20px;

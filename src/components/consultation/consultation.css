@@ -5,7 +5,6 @@ height: auto;
 padding-top: 60px;
 padding-bottom: 60px;
 position: relative;
-z-index: 9999;
 }
     
 .consultation-content{
@@ -106,7 +105,7 @@ z-index: 1;
  .modal {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 99999;
   left: 0;
   top: 0;
   width: 100%;
@@ -120,6 +119,7 @@ z-index: 1;
 }
 
 .modal--open {
+ z-index: 99999;
   display: flex;
 }
 
