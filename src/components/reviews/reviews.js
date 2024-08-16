@@ -118,7 +118,7 @@ const AppReviews = ({ auth }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://api.bytewaves.net/reviews/delete/${id}`, { 
+      await axios.delete(`https://api.autoboyclub.net/reviews/delete/${id}`, { 
         headers: {
           Authorization: `Bearer ${auth.token}`
         }

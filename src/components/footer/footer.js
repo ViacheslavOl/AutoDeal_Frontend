@@ -26,11 +26,11 @@ const AppFooter = () => {
         </div>
         <div className="footer-content__politic footer__div">
           <h3>Политика конфиденциальности</h3>
-          <h3>Условия использования</h3>
+    
           <div className="footer__social-media">
-            <a href="https://telegram.org"><img src="/images/telegram.png" alt="Telegram" /></a>
-            <a href="https://instagram.com"><img src="/images/inst.png" alt="Instagram" /></a>
-            <a href="https://facebook.com"><img src="/images/facebook.png" alt="Facebook" /></a>
+            <a href="https://telegram.org"><img src="/images/telega.svg" alt="Telegram" /></a>
+            <a href="https://instagram.com"><img src="/images/inst.svg" alt="Instagram" /></a>
+            <a href="https://facebook.com"><img src="/images/facebook.svg" alt="Facebook" /></a>
           </div>
         </div>
         <div className="footer-content__connection footer__div">

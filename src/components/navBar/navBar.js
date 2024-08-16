@@ -121,6 +121,10 @@ useEffect(() => {
             </a>
           </>
         )}
+        <div className='burger-menu-social'>
+        <a href="https://instagram.com"><img src="images/inst.svg" alt="inst" /></a>
+        <a href="https://facebook.com"><img src="images/facebook.svg" alt="facebook" /></a>
+        <a href="https://telegram.org"><img src="images/telega.svg" alt="telega" /></a></div>
       </div>
       <AdminModal isOpen={isAdminModalOpen} onClose={closeAdminModal} auth={auth} />
     </div>

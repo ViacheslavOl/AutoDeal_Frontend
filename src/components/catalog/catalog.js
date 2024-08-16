@@ -84,7 +84,7 @@ const AppCatalog = ({ auth }) => {
   const openFullscreenImage = (index, item) => {
     setFullscreenImages(
       [item.photo1, item.photo2, item.photo3, item.photo4, item.photo5]
-      .filter(Boolean).map(photo => `https://api.bytewaves.net/uploads/${photo}`)
+      .filter(Boolean).map(photo => `https://api.autoboyclub.net/uploads/${photo}`)
     );
     setFullscreenImageIndex(index);
     setIsFullscreen(true);
@@ -257,7 +257,7 @@ const AppCatalog = ({ auth }) => {
              <div className="catalog-content__grid-container">
               {currentItems.map(item => (
 <div key={item.id} className="catalog__grid-item">
-<img className="catalog__grid-item__main-img" src={`https://api.bytewaves.net/uploads/${item.photo1}`} alt={item.name} onClick={() => openFullscreenImage(0, item)} />
+<img className="catalog__grid-item__main-img" src={`https://api.autoboyclub.net/uploads/${item.photo1}`} alt={item.name} onClick={() => openFullscreenImage(0, item)} />
                   <h2>{item.name}</h2>
                   <h3>{item.price}</h3>
                   <div className="catalog__grid-item__icons">
@@ -331,7 +331,7 @@ const AppCatalog = ({ auth }) => {
     selectedItem.photo3,
     selectedItem.photo4,
     selectedItem.photo5,
-  ].filter(Boolean).map(photo => `https://api.bytewaves.net/uploads/${photo}`)}
+  ].filter(Boolean).map(photo => `https://api.autoboyclub.net/uploads/${photo}`)}
   openFullscreenImage={openFullscreenImage} 
   selectedItem={selectedItem}
 />}
