@@ -1,0 +1,79 @@
+@use "../../styles/abstracts/_variables" as v;
+@use "../../styles/abstracts/mixins" as m;
+
+.question {
+  width: 100%;
+  background: url("../../assets/getConsultationBackX2.jpg") center / cover no-repeat;
+  padding: 3rem 5rem;
+}
+.container {
+  background-color: #1b1b1b;
+  text-align: center;
+  padding: 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  padding: 3rem 5rem 4rem 5rem;
+}
+
+.title {
+  color: v.$color-orange;
+  font-size: 2rem;
+  font-weight: v.$weight-600;
+}
+.subtitle {
+  font-weight: v.$weight-400;
+  font-size: 1.06rem;
+}
+
+.button {
+  @include m.glow-button();
+}
+
+.subtitle {
+  margin-bottom: 1.25rem;
+}
+
+.inputs {
+  padding: 0 6.25rem;
+  margin-bottom: 1.875rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.select:has(option[value=""]:checked) {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: v.$color-white;
+  color: v.$color-black;
+  font: inherit;
+  outline: none;
+
+  &:focus {
+    border-color: rgba(248, 53, 25, 0.6);
+    box-shadow: 0 0 0 0.2rem rgba(248, 53, 25, 0.18);
+  }
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.45);
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 0.063rem;
+  height: 0.063rem;
+  padding: 0;
+  margin: -0.063rem;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

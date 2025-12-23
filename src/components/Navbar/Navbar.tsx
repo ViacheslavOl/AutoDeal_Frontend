@@ -1,11 +1,12 @@
 import styles from "./Navbar.module.scss";
+import logo from "../../assets/logoCar.png";
 
 const Navbar = () => {
   return (
     <header>
       <nav className={styles.nav}>
         <div className={styles.logo}>
-          <img src="/images/logoCar.png" alt="AutoDeal logo" />
+          <img src={logo} alt="AutoDeal logo" />
         </div>
         <ul className={styles.menu}>
           <li>

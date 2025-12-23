@@ -1,0 +1,67 @@
+@use "../../styles/abstracts/_variables" as v;
+@use "../../styles/abstracts/mixins" as m;
+
+.advantage {
+  width: 100%;
+  background: url("../../assets/advantageBackX2.jpg") center / cover no-repeat;
+}
+.container {
+  @include m.container;
+}
+.line {
+  height: 0.25rem;
+  background-color: v.$color-orange;
+}
+.title {
+  @include m.title;
+  font-weight: v.$weight-500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.card {
+  position: relative;
+  padding: 1.75rem 1.75rem 1.625rem;
+  border-radius: 18px;
+  background: rgba(10, 10, 10, 0.7);
+  border: 0.1px solid rgba(0, 0, 0, 0.024);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  min-height: 11.875rem;
+}
+
+.badge {
+  position: absolute;
+  top: 0.625rem;
+  right: 1.125rem;
+  font-size: 1.563rem;
+  font-weight: v.$weight-700;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+  color: v.$color-orange;
+}
+
+.cardTitle {
+  margin: 0 0 0.75rem;
+  font-size: 1.563rem;
+  font-weight: v.$weight-700;
+  line-height: 1.1;
+}
+
+.cardText {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.82;
+  max-width: 46ch;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}

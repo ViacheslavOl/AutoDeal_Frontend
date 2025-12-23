@@ -1,13 +1,13 @@
+@use "../../styles/abstracts/mixins" as m;
+
 .nav {
-  display: flex;
-  justify-content: space-between;
+  @include m.flexBetween;
   background-color: #171717;
   padding: 0.7rem 5rem;
 }
 
 .menu {
-  display: flex;
-  justify-content: space-between;
+  @include m.flexBetween;
   width: 31.25rem;
 
   li {
@@ -24,4 +24,5 @@
   border: 1.9px solid #fff;
   border-radius: 6px;
   padding: 0.1rem 1rem;
+  font-size: 0.9rem;
 }

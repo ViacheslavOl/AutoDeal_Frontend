@@ -1,0 +1,48 @@
+@use "../../styles/abstracts/_variables" as v;
+@use "../../styles/abstracts/mixins" as m;
+
+.brand {
+  width: 100%;
+}
+
+.line {
+  height: 0.25rem;
+  background-color: v.$color-orange;
+  margin-bottom: 1.25rem;
+}
+
+.container {
+  @include m.flexBetween;
+  padding-bottom: 1.5rem;
+}
+
+.container img {
+  width: 3.8em;
+}
+
+.swiper :global(.swiper-wrapper) {
+  transition-timing-function: linear !important;
+}
+.item {
+  height: 4rem;
+  @include m.flexCenter;
+}
+
+.title {
+  @include m.title;
+  font-weight: v.$weight-600;
+  color: v.$color-black;
+  margin: 0rem 5rem;
+}
+
+.subtitle {
+  color: v.$color-black;
+  max-width: 50rem;
+  padding-left: 1rem;
+  border-left: 0.25rem solid v.$color-orange;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  font-weight: v.$weight-400;
+  margin: 0rem 5rem 2rem 5rem;
+}
