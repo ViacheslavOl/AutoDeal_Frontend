@@ -43,8 +43,14 @@ const Question = () => {
           Get a free consultation
         </button>
       </div>
-      <Modal open={open} onOpenChange={setOpen} title="My modal">
-        Любой контент внутри
+      <Modal open={open} onOpenChange={setOpen}>
+        <div className={styles.modal}>
+          <h2 className={styles.modalTitle}>Thank you for your request!</h2>
+          <h3 className={styles.modalSubtitle}>We’ll be in touch shortly through your selected contact method. Thank you for choosing us — we’re excited to help you!</h3>
+          <button onClick={() => setOpen(false)} className={styles.close}>
+            Close
+          </button>
+        </div>
       </Modal>
     </section>
   );
