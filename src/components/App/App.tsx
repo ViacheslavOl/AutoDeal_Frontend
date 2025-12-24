@@ -1,6 +1,5 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.scss";
-import Navbar from "../Navbar/Navbar";
 import Hero from "../Hero/Hero";
 import AutomotiveBrand from "../AutomotiveBrand/AutomotiveBrand";
 import Advantage from "../Advantage/Advantage";
@@ -9,25 +8,31 @@ import Consultation from "../Consultation/Consultation";
 import Review from "../Review/Review";
 import Question from "../Question/Question";
 import CarSelection from "../CarSelection/CarSelection";
-import Footer from "../Footer/Footer";
+import Card from "../Card/Card";
+import Layout from "../Layout/Layout";
 
-const App = () => {
+const Home = () => (
+  <>
+    <Hero />
+    <AutomotiveBrand />
+    <Advantage />
+    <Catalog />
+    <Consultation />
+    <Review />
+    <Question />
+    <CarSelection />
+  </>
+);
+
+export default function App() {
   return (
     <Router>
-      <div className="app">
-        <Navbar />
-        <Hero />
-        <AutomotiveBrand />
-        <Advantage />
-        <Catalog />
-        <Consultation />
-        <Review />
-        <Question />
-        <CarSelection />
-        <Footer />
-      </div>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/dev" element={<Card />} />
+        </Route>
+      </Routes>
     </Router>
   );
-};
-
-export default App;
+}

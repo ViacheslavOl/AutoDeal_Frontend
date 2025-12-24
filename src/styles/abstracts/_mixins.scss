@@ -43,6 +43,11 @@
   flex-direction: column;
 }
 
+@mixin flexWrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @mixin container {
   max-width: 1400px;
   width: 100%;

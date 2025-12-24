@@ -1,6 +1,10 @@
+import Modal from "../Ui/Modal/Modal";
 import styles from "./Question.module.scss";
+import { useState } from "react";
 
 const Question = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className={styles.question}>
       <div className={styles.container}>
@@ -35,8 +39,13 @@ const Question = () => {
             <option value="16-18">16:00–18:00</option>
           </select>
         </div>
-        <button className={styles.button}>Get a free consultation</button>
+        <button onClick={() => setOpen(true)} className={styles.button}>
+          Get a free consultation
+        </button>
       </div>
+      <Modal open={open} onOpenChange={setOpen} title="My modal">
+        Любой контент внутри
+      </Modal>
     </section>
   );
 };

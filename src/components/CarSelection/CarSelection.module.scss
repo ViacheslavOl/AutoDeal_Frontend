@@ -25,12 +25,16 @@
 }
 
 .selectionTitle {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.title {
+  color: v.$color-black;
 }
 
 .subtitle {
   font-weight: v.$weight-400;
-  font-size: 0.625rem;
+  font-size: 0.875rem;
   max-width: 25rem;
 }
 .line {
@@ -47,9 +51,7 @@
   gap: 0.625rem;
   padding: 1.25rem;
 }
-.title {
-  color: v.$color-black;
-}
+
 .input,
 .select {
   width: 100%;
