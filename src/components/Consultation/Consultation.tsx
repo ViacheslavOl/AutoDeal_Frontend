@@ -105,8 +105,8 @@ const Consultation = () => {
               handleSubmit();
             }}
           >
-            <h2 className={styles.modalTitle}>Get 5% off your first order</h2>
-            <h3 className={styles.modalSubtitle}>To claim your 5% discount, please enter your email. We’ll reach out to confirm your request and share the details.</h3>
+            <h2 className={styles.modalTitle}>Contact us</h2>
+            <h3 className={styles.modalSubtitle}> Leave your email, and our team will contact you and answer any questions.</h3>
 
             <input className={styles.modalInput} type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
