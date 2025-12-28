@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "./CarsCatalogPage.module.scss";
 import { useNavigate } from "react-router-dom";
 
 import CarsCatalogFiltersModal from "./CarsCatalogFiltersModal";
-import { getCars, sendLead } from "../api/leads.api";
+import { getCars, getFilteredCars, sendLead } from "../api/leads.api";
 import type { Car } from "../api/leads.api";
 
 import { normalizeEmail, validateEmail } from "../../utils/validation";
@@ -17,6 +17,7 @@ const CarsCatalogPage = () => {
   const navigate = useNavigate();
 
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   const [contactOpen, setContactOpen] = useState(false);
   const [contactStep, setContactStep] = useState<ContactStep>("form");
@@ -31,6 +32,23 @@ const CarsCatalogPage = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
+
+  const loadFirstPage = useCallback(async (cancelled?: { current: boolean }) => {
+    try {
+      setLoading(true);
+      setFetchError(null);
+
+      const data = await getCars({ limit: PAGE_SIZE, offset: 0 });
+      if (cancelled?.current) return;
+
+      setCars(data);
+      setHasMore(data.length === PAGE_SIZE);
+    } catch (e) {
+      if (!cancelled?.current) setFetchError(e instanceof Error ? e.message : "Unknown error");
+    } finally {
+      if (!cancelled?.current) setLoading(false);
+    }
+  }, []);
 
   const resetContact = () => {
     setContactStep("form");
@@ -83,30 +101,13 @@ const CarsCatalogPage = () => {
   };
 
   useEffect(() => {
-    let cancelled = false;
+    const cancelled = { current: false };
 
-    async function loadFirstPage() {
-      try {
-        setLoading(true);
-        setFetchError(null);
-
-        const data = await getCars({ limit: PAGE_SIZE, offset: 0 });
-        if (cancelled) return;
-
-        setCars(data);
-        setHasMore(data.length === PAGE_SIZE);
-      } catch (e) {
-        if (!cancelled) setFetchError(e instanceof Error ? e.message : "Unknown error");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-
-    loadFirstPage();
+    void loadFirstPage(cancelled);
     return () => {
-      cancelled = true;
+      cancelled.current = true;
     };
-  }, []);
+  }, [loadFirstPage]);
 
   const onLoadMore = async () => {
     if (loadingMore || !hasMore) return;
@@ -126,6 +127,28 @@ const CarsCatalogPage = () => {
     }
   };
 
+  const handleApplyFilters = async (query: string) => {
+    if (!query) {
+      setIsFiltered(false);
+      setHasMore(true);
+      await loadFirstPage();
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setFetchError(null);
+
+      const filteredCars = await getFilteredCars(query);
+      setCars(filteredCars);
+      setHasMore(false);
+      setIsFiltered(true);
+    } catch (e) {
+      setFetchError(e instanceof Error ? e.message : "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  };
   if (loading) return <div className={styles.container}>Loading...</div>;
   if (fetchError) return <div className={styles.container}>Error: {fetchError}</div>;
 
@@ -139,87 +162,96 @@ const CarsCatalogPage = () => {
           </button>
         </div>
 
-        <CarsCatalogFiltersModal open={filtersOpen} onOpenChange={setFiltersOpen} />
+        <CarsCatalogFiltersModal open={filtersOpen} onOpenChange={setFiltersOpen} onApply={handleApplyFilters} />
 
-        <div className={styles.grid}>
-          {cars.map((car) => {
-            const image = car.photo1 || car.photo2 || car.photo3 || car.photo4 || car.photo5 || "";
-            const title = car.name ?? "Untitled";
-            const desc = car.description ?? "";
-            const year = car.year ?? "—";
-            const mileage = car.mileage ?? "—";
-            const fuel = car.fuel ?? "—";
-            const transmission = car.transmission ?? "—";
-            const location = [car.country, car.city].filter(Boolean).join(" / ") || "—";
-            const price = car.price ?? "—";
-            const badge = car.status ?? "—";
+        {cars.length === 0 && isFiltered ? (
+          <div className={styles.emptyState} role="status">
+            <span className={styles.emptyIcon} aria-hidden>
+              🔍
+            </span>
+            <p className={styles.emptyTitle}>No cars found</p>
+            <p className={styles.emptySubtitle}>Try changing or clearing the filters to see more results.</p>
+          </div>
+        ) : (
+          <div className={styles.grid}>
+            {cars.map((car) => {
+              const image = car.photo1 || car.photo2 || car.photo3 || car.photo4 || car.photo5 || "";
+              const title = car.name ?? "Untitled";
+              const desc = car.description ?? "";
+              const year = car.year ?? "—";
+              const mileage = car.mileage ?? "—";
+              const fuel = car.fuel ?? "—";
+              const transmission = car.transmission ?? "—";
+              const location = [car.country, car.city].filter(Boolean).join(" / ") || "—";
+              const price = car.price ?? "—";
+              const badge = car.status ?? "—";
 
-            return (
-              <article key={car.id} className={styles.card} onClick={() => navigate(`/cars/${car.id}`)} role="link" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && navigate(`/cars/${car.id}`)}>
-                <div className={styles.imageWrap}>
-                  {image ? <img className={styles.image} src={image} alt={title} /> : <div className={styles.image} />}
-                  <span className={styles.badge}>{badge}</span>
-                </div>
-
-                <div className={styles.body}>
-                  <h3 className={styles.cardTitle}>{title}</h3>
-                  <p className={styles.desc}>{desc}</p>
-
-                  <div className={styles.meta}>
-                    <div className={styles.metaRow}>
-                      <span className={styles.metaLabel}>Year</span>
-                      <span className={styles.metaValue}>{year}</span>
-                    </div>
-                    <div className={styles.metaRow}>
-                      <span className={styles.metaLabel}>Mileage</span>
-                      <span className={styles.metaValue}>{mileage}</span>
-                    </div>
-                    <div className={styles.metaRow}>
-                      <span className={styles.metaLabel}>Fuel</span>
-                      <span className={styles.metaValue}>{fuel}</span>
-                    </div>
-                    <div className={styles.metaRow}>
-                      <span className={styles.metaLabel}>Transmission</span>
-                      <span className={styles.metaValue}>{transmission}</span>
-                    </div>
-                    <div className={styles.metaRow}>
-                      <span className={styles.metaLabel}>Location</span>
-                      <span className={styles.metaValue}>{location}</span>
-                    </div>
+              return (
+                <article key={car.id} className={styles.card} onClick={() => navigate(`/cars/${car.id}`)} role="link" tabIndex={0} onKeyDown={(e) => e.key === "Enter" && navigate(`/cars/${car.id}`)}>
+                  <div className={styles.imageWrap}>
+                    {image ? <img className={styles.image} src={image} alt={title} /> : <div className={styles.image} />}
+                    <span className={styles.badge}>{badge}</span>
                   </div>
 
-                  <div className={styles.bottom}>
-                    <div className={styles.price}>From €{price}</div>
+                  <div className={styles.body}>
+                    <h3 className={styles.cardTitle}>{title}</h3>
+                    <p className={styles.desc}>{desc}</p>
 
-                    <div className={styles.actions}>
-                      <button
-                        className={styles.btnPrimary}
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openModalForCar(car);
-                        }}
-                      >
-                        Contact Consultant
-                      </button>
+                    <div className={styles.meta}>
+                      <div className={styles.metaRow}>
+                        <span className={styles.metaLabel}>Year</span>
+                        <span className={styles.metaValue}>{year}</span>
+                      </div>
+                      <div className={styles.metaRow}>
+                        <span className={styles.metaLabel}>Mileage</span>
+                        <span className={styles.metaValue}>{mileage}</span>
+                      </div>
+                      <div className={styles.metaRow}>
+                        <span className={styles.metaLabel}>Fuel</span>
+                        <span className={styles.metaValue}>{fuel}</span>
+                      </div>
+                      <div className={styles.metaRow}>
+                        <span className={styles.metaLabel}>Transmission</span>
+                        <span className={styles.metaValue}>{transmission}</span>
+                      </div>
+                      <div className={styles.metaRow}>
+                        <span className={styles.metaLabel}>Location</span>
+                        <span className={styles.metaValue}>{location}</span>
+                      </div>
+                    </div>
 
-                      <button
-                        className={styles.btnGhost}
-                        type="button"
-                        onClick={(e) => {
-                          navigate(`/cars/${car.id}`);
-                        }}
-                      >
-                        Details
-                      </button>
+                    <div className={styles.bottom}>
+                      <div className={styles.price}>From €{price}</div>
+
+                      <div className={styles.actions}>
+                        <button
+                          className={styles.btnPrimary}
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openModalForCar(car);
+                          }}
+                        >
+                          Contact Consultant
+                        </button>
+
+                        <button
+                          className={styles.btnGhost}
+                          type="button"
+                          onClick={(e) => {
+                            navigate(`/cars/${car.id}`);
+                          }}
+                        >
+                          Details
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-
+                </article>
+              );
+            })}
+          </div>
+        )}
         {hasMore && (
           <div className={styles.loadMoreWrap}>
             <button className={styles.btnMore} type="button" onClick={onLoadMore} disabled={loadingMore}>

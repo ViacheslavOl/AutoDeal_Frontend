@@ -66,3 +66,14 @@ export const getCars = async (params?: { limit?: number; offset?: number }) => {
   const data: Car[] = await res.json();
   return data;
 };
+
+export const getFilteredCars = async (query: string) => {
+  const BACKEND = process.env.REACT_APP_BACKEND ?? "http://localhost:8000";
+
+  const url = `${BACKEND}/cars/filters${query ? `?${query}` : ""}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+  const data: Car[] = await res.json();
+  return data;
+};

@@ -5,6 +5,7 @@ import styles from "./CarsCatalogFiltersModal.module.scss";
 type Props = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onApply: (query: string) => Promise<void> | void;
 };
 
 const fuelOptions = ["Petrol", "Diesel", "Hybrid", "Electric", "Plug-in Hybrid", "Hydrogen"];
@@ -55,7 +56,7 @@ const createInitialState = (): FilterState => ({
   color: createCheckboxState(colorOptions),
 });
 
-const CarsCatalogFiltersModal = ({ open, onOpenChange }: Props) => {
+const CarsCatalogFiltersModal = ({ open, onOpenChange, onApply }: Props) => {
   const [filters, setFilters] = useState<FilterState>(() => createInitialState());
 
   const toggleCheckbox = (category: CheckboxCategory, option: string) => {
@@ -83,8 +84,6 @@ const CarsCatalogFiltersModal = ({ open, onOpenChange }: Props) => {
       .filter(([, checked]) => checked)
       .map(([key]) => key);
 
-  const BACKEND = process.env.REACT_APP_BACKEND ?? "http://localhost:8000";
-
   const handleApply = async () => {
     const params = new URLSearchParams();
     if (filters.yearFrom) params.append("yearFrom", filters.yearFrom);
@@ -108,15 +107,13 @@ const CarsCatalogFiltersModal = ({ open, onOpenChange }: Props) => {
     if (selectedSeats.length) params.append("seats", selectedSeats.join(","));
     if (selectedColor.length) params.append("color", selectedColor.join(","));
 
-    const url = `${BACKEND}/cars/filters?${params.toString()}`;
     try {
-      await fetch(url, { method: "GET" });
-      console.log(params.toString());
+      await onApply(params.toString());
+      setFilters(createInitialState());
+      onOpenChange(false);
     } catch (error) {
       console.error("Failed to send filters", error);
     }
-    setFilters(createInitialState());
-    onOpenChange(false);
   };
 
   return (
