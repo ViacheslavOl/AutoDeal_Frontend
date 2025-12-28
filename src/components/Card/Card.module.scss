@@ -275,8 +275,7 @@
   gap: 0.625rem;
 }
 
-.btnPrimary,
-.btnGhost {
+.btnPrimary {
   border-radius: 14px;
   padding: 0.75rem 0.875rem;
   font-weight: v.$weight-700;
@@ -296,18 +295,7 @@
   box-shadow: 0 1rem 2.125rem rgba(0, 0, 0, 0.22);
 }
 
-.btnGhost {
-  border: 1px solid rgba(0, 0, 0, 0.16);
-  background: transparent;
-}
-
-.btnGhost:hover {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.22);
-}
-
 .btnPrimary:focus-visible,
-.btnGhost:focus-visible,
 .linkBtn:focus-visible {
   outline: 0.1875rem solid rgba(17, 17, 17, 0.25);
   outline-offset: 0.125rem;
@@ -333,4 +321,54 @@
   color: rgba(23, 23, 23, 0.68);
   line-height: 1.35;
   text-align: center;
+}
+
+.modal {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.modalCloseButton {
+  @include m.close-button;
+}
+
+.modalButtonContainer {
+  @include m.flexCenter;
+  gap: 10px;
+}
+
+.modalInput {
+  @include m.modal-input;
+  margin: 10px 0px 5px 0px;
+}
+
+.modalSubmitButton {
+  @include m.close-button;
+  background-color: v.$color-orange;
+  &:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 2px 10px rgba(255, 81, 0, 0.808);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(255, 0, 0, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.65);
+    outline-offset: 2px;
+  }
+}
+
+.modalTitle {
+  color: v.$color-black;
+}
+.modalSubtitle {
+  color: v.$color-black;
+  font-weight: v.$weight-400;
+  font-size: 0.9rem;
+}
+.close {
+  @include m.close-button;
 }

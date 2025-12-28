@@ -4,13 +4,16 @@ import { useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, Thumbs, FreeMode } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/thumbs";
 import "swiper/css/free-mode";
 import { useParams } from "react-router-dom";
+import { normalizeEmail, validateEmail } from "../../utils/validation";
+import { sendLead } from "../api/leads.api";
+
+type Step = "form" | "thanks";
 
 export type Car = {
   id: number;
@@ -46,6 +49,8 @@ export type Car = {
 };
 
 const Card = () => {
+  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<Step>("form");
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFsOpen, setIsFsOpen] = useState(false);
@@ -53,6 +58,59 @@ const Card = () => {
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const resetModalState = () => {
+    setStep("form");
+    setEmail("");
+    setError(null);
+    setIsSubmitting(false);
+    setCar(null);
+  };
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    if (!nextOpen) resetModalState();
+  };
+
+  const openModalForCar = (car: Car) => {
+    setStep("form");
+    setEmail("");
+    setError(null);
+    setIsSubmitting(false);
+
+    setCar(car);
+    setOpen(true);
+  };
+
+  const handleSubmit = async () => {
+    if (isSubmitting) return;
+
+    setError(null);
+
+    const emailError = validateEmail(email);
+    if (emailError) {
+      setError(emailError);
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      await sendLead({
+        type: "CAR_CONTACT",
+        email: normalizeEmail(email),
+      });
+
+      setStep("thanks");
+      setEmail("");
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     if (!isFsOpen) return;
@@ -93,9 +151,9 @@ const Card = () => {
     return [car.photo1, car.photo2, car.photo3, car.photo4, car.photo5].filter((x): x is string => typeof x === "string" && x.length > 0);
   }, [car]);
 
-  if (loading) return <div>Загрузка...</div>;
-  if (error) return <div>Ошибка: {error}</div>;
-  if (!car) return <div>Не найдено</div>;
+  if (loading) return <div className={styles.container}>Loading...</div>;
+  if (error) return <div className={styles.container}>Error: {error}</div>;
+  if (!car) return <div className={styles.container}>Not found</div>;
 
   return (
     <section className={styles.card}>
@@ -238,11 +296,15 @@ const Card = () => {
             </div>
 
             <div className={styles.actions}>
-              <button className={styles.btnPrimary} type="button">
-                Get consultation
-              </button>
-              <button className={styles.btnGhost} type="button">
-                Request inspection report
+              <button
+                className={styles.btnPrimary}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openModalForCar(car);
+                }}
+              >
+                Get Consultation
               </button>
             </div>
 
@@ -250,6 +312,47 @@ const Card = () => {
           </div>
         </div>
       </div>
+      <Modal open={open} onOpenChange={handleOpenChange}>
+        {step === "form" ? (
+          <form
+            className={styles.modal}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            <h2 className={styles.modalTitle}>Contact us</h2>
+            <h3 className={styles.modalSubtitle}>
+              Leave your email, and our team will contact you shortly to discuss <span className={styles.accent}>{car ? car.name : "the car"}</span>, confirm availability, and answer any questions.
+            </h3>
+
+            <input className={styles.modalInput} type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={isSubmitting} />
+
+            {error && <p className={styles.error}>{error}</p>}
+
+            <div className={styles.modalButtonContainer}>
+              <button type="button" onClick={() => handleOpenChange(false)} className={styles.close} disabled={isSubmitting}>
+                Close
+              </button>
+
+              <button className={styles.modalSubmitButton} type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Submit"}
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div className={styles.modal}>
+            <h2 className={styles.modalTitle}>Thank you! Your request has been received</h2>
+            <h3 className={styles.modalSubtitle}>We’ll contact you shortly to confirm the details and help you with your request.</h3>
+
+            <div className={styles.modalButtonContainer}>
+              <button type="button" onClick={() => handleOpenChange(false)} className={styles.modalCloseButton}>
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+      </Modal>
     </section>
   );
 };
