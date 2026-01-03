@@ -251,7 +251,7 @@ const Card = () => {
           <div className={styles.purchase}>
             <div className={styles.priceRow}>
               <div className={styles.priceLabel}>Price</div>
-              <div className={styles.price}>{car.price ?? "—"}</div>
+              <div className={styles.price}>€{car.price ?? "—"}</div>
             </div>
 
             <div className={styles.actions}>

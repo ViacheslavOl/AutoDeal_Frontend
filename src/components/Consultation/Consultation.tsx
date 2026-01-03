@@ -3,8 +3,7 @@ import { Modal } from "../Ui/Modal/Modal";
 import { useState } from "react";
 import { normalizeEmail, validateEmail } from "../../utils/validation";
 import { sendLead } from "../api/leads.api";
-import consultantFirst from "../../assets/consultants/consultant1.jpg";
-import consultantSecond from "../../assets/consultants/consultant2.jpg";
+import { CONSULTANTS } from "../Consultants/Consultants";
 
 type Step = "form" | "thanks";
 
@@ -14,12 +13,14 @@ const Consultation = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedConsultant, setSelectedConsultant] = useState<string | null>(null);
 
   const resetModalState = () => {
     setStep("form");
     setEmail("");
     setError(null);
     setIsSubmitting(false);
+    setSelectedConsultant(null);
   };
 
   const handleOpenChange = (nextOpen: boolean) => {
@@ -27,8 +28,9 @@ const Consultation = () => {
     if (!nextOpen) resetModalState();
   };
 
-  const handleOpen = () => {
+  const handleOpen = (consultantName: string) => {
     resetModalState();
+    setSelectedConsultant(consultantName);
     setOpen(true);
   };
 
@@ -70,30 +72,20 @@ const Consultation = () => {
           Get in touch with us today for a personalized consultation and exclusive offers.
         </h3>
         <div className={styles.consultants}>
-          <figure className={styles.consultant}>
-            <img src={consultantFirst} alt="Photo of the consultant" />
-            <figcaption>
-              <p className={styles.name}>Michael Carter</p>
-              <p className={styles.role}>Vehicle Sourcing Specialist</p>
-              <div className={styles.consultantActions}>
-                <button onClick={handleOpen} className={styles.btnPrimary} type="button">
-                  Contact
-                </button>
-              </div>
-            </figcaption>
-          </figure>
-          <figure className={styles.consultant}>
-            <img src={consultantSecond} alt="Photo of the consultant" />
-            <figcaption>
-              <p className={styles.name}>Emily Johnson</p>
-              <p className={styles.role}>Logistics & Delivery Consultant</p>
-              <div className={styles.consultantActions}>
-                <button onClick={handleOpen} className={styles.btnPrimary} type="button">
-                  Contact
-                </button>
-              </div>
-            </figcaption>
-          </figure>
+          {CONSULTANTS.map((consultant) => (
+            <figure className={styles.consultant} key={consultant.id}>
+              <img src={consultant.photo} alt={`Photo of ${consultant.name}`} />
+              <figcaption>
+                <p className={styles.name}>{consultant.name}</p>
+                <p className={styles.role}>{consultant.role}</p>
+                <div className={styles.consultantActions}>
+                  <button onClick={() => handleOpen(consultant.name)} className={styles.btnPrimary} type="button">
+                    Contact
+                  </button>
+                </div>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </div>
       <Modal open={open} onOpenChange={handleOpenChange}>
@@ -105,7 +97,9 @@ const Consultation = () => {
               handleSubmit();
             }}
           >
-            <h2 className={styles.modalTitle}>Contact us</h2>
+            <h2 className={styles.modalTitle}>
+              Contact <span className={styles.accent}>{selectedConsultant ?? "us"}</span>{" "}
+            </h2>
             <h3 className={styles.modalSubtitle}> Leave your email, and our team will contact you and answer any questions.</h3>
 
             <input className={styles.modalInput} type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />

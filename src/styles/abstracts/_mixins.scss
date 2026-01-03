@@ -1,23 +1,23 @@
 @use "./_variables" as v;
 
-@mixin glow-button($bg: v.$color-orange, $border: rgba(248, 53, 25, 0.65), $radius: 0.375rem, $py: 0.5rem, $px: 1.35rem) {
+@mixin glow-button($bg: v.$color-orange, $border: rgba(248, 53, 25, 0.65), $radius: 0.375rem, $py: 0.5rem, $px: 1.35rem, $glow: 1) {
   border: 1px solid $border;
   border-radius: $radius;
   padding: $py $px;
   background: $bg;
 
-  box-shadow: 0 0 0 1px rgba(248, 53, 25, 0.35), 0 0 18px rgba(248, 53, 25, 0.55), 0 0 40px rgba(248, 53, 25, 0.25);
+  box-shadow: 0 0 0 1px rgba(248, 53, 25, 0.35), 0 0 calc(18px * $glow) rgba(248, 53, 25, 0.55), 0 0 calc(40px * $glow) rgba(248, 53, 25, 0.25);
 
   transition: transform 120ms ease, box-shadow 160ms ease, filter 160ms ease;
 
   &:hover {
     filter: brightness(1.06);
-    box-shadow: 0 0 0 1px rgba(248, 53, 25, 0.45), 0 0 22px rgba(248, 53, 25, 0.7), 0 0 52px rgba(248, 53, 25, 0.35);
+    box-shadow: 0 0 0 1px rgba(248, 53, 25, 0.45), 0 0 calc(22px * $glow) rgba(248, 53, 25, 0.7), 0 0 calc(52px * $glow) rgba(248, 53, 25, 0.35);
   }
 
   &:active {
     transform: translateY(0.0625rem);
-    box-shadow: 0 0 0 1px rgba(248, 53, 25, 0.35), 0 0 14px rgba(248, 53, 25, 0.5), 0 0 30px rgba(248, 53, 25, 0.2);
+    box-shadow: 0 0 0 1px rgba(248, 53, 25, 0.35), 0 0 calc(14px * $glow) rgba(248, 53, 25, 0.5), 0 0 calc(30px * $glow) rgba(248, 53, 25, 0.2);
   }
 
   &:focus-visible {

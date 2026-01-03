@@ -146,7 +146,13 @@
 
 .modalTitle {
   color: v.$color-black;
+  font-weight: 700;
 }
+
+.accent {
+  color: v.$color-orange;
+}
+
 .modalSubtitle {
   color: v.$color-black;
   font-weight: v.$weight-400;

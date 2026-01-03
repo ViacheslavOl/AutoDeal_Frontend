@@ -4,6 +4,7 @@ import { useState } from "react";
 import { validateEmail, validateName } from "../../utils/validation";
 import { sendLead } from "../api/leads.api";
 import type { LeadType } from "../api/leads.api";
+import { CONSULTANTS } from "../Consultants/Consultants";
 
 type LeadFormState = {
   type: LeadType;
@@ -89,9 +90,11 @@ const Question = () => {
               <option value="" disabled>
                 Choose a consultant
               </option>
-              <option value="anna">Anna</option>
-              <option value="mark">Mark</option>
-              <option value="kate">Kate</option>
+              {CONSULTANTS.map((consultant) => (
+                <option key={consultant.id} value={consultant.name}>
+                  {consultant.name}
+                </option>
+              ))}
             </select>
 
             <label className={styles.srOnly} htmlFor="time">

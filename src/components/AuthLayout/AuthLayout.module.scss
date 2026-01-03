@@ -1,0 +1,62 @@
+@use "../../styles/abstracts/_variables" as v;
+@use "../../styles/abstracts/mixins" as m;
+
+.auth {
+  min-height: 100vh;
+  width: 100%;
+  background: url("../../assets/authBackX2.jpg") center / cover no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  background-color: v.$color-white;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.title {
+  color: v.$color-black;
+  font-size: 2rem;
+  font-weight: v.$weight-600;
+  text-align: center;
+}
+
+.input {
+  @include m.modal-input;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 1rem;
+}
+
+.button {
+  @include m.glow-button();
+  display: block;
+  margin: 0.5rem auto 0;
+}
+
+.switchText {
+  margin-top: 12px;
+  text-align: center;
+  color: v.$color-black;
+  font-size: 0.95rem;
+}
+
+.switchBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: underline;
+  color: inherit;
+}

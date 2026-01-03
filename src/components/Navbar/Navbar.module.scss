@@ -1,8 +1,9 @@
 @use "../../styles/abstracts/mixins" as m;
+@use "../../styles/abstracts/variables" as v;
 
 .nav {
   @include m.flexBetween;
-  background-color: #171717;
+  background-color: v.$color-black;
   padding: 0.7rem 5rem;
 }
 
@@ -21,8 +22,6 @@
 }
 
 .car_finder {
-  border: 1.9px solid #fff;
-  border-radius: 6px;
-  padding: 0.1rem 1rem;
+  @include m.glow-button($py: 0.1rem, $px: 1rem, $glow: 0.3);
   font-size: 0.9rem;
 }

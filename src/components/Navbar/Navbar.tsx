@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.scss";
 import logo from "../../assets/logoCar.png";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <header>
       <nav className={styles.nav}>
@@ -25,7 +27,9 @@ const Navbar = () => {
             <a href="/consultation">Consultation</a>
           </li>
         </ul>
-        <button className={styles.car_finder}>Car Finder</button>
+        <button className={styles.car_finder} onClick={() => navigate("/auth")}>
+          Sign in
+        </button>
       </nav>
     </header>
   );

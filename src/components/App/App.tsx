@@ -11,6 +11,7 @@ import CarSelection from "../CarSelection/CarSelection";
 import Card from "../Card/Card";
 import Layout from "../Layout/Layout";
 import CarsCatalogPage from "../CarsCatalogPage/CarsCatalogPage";
+import AuthLayout from "../AuthLayout/AuthLayout";
 
 const Home = () => (
   <>
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cars/:id" element={<Card />} />
           <Route path="/catalog" element={<CarsCatalogPage />} />
+          <Route path="/auth" element={<AuthLayout />} />
         </Route>
       </Routes>
     </Router>
