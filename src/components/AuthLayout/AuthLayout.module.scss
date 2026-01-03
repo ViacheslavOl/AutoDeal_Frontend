@@ -60,3 +60,9 @@
   text-decoration: underline;
   color: inherit;
 }
+
+.error {
+  color: v.$color-black;
+  font-size: 0.9rem;
+  margin-top: -6px;
+}
