@@ -134,11 +134,11 @@ const AdminPanel = () => {
   };
 
   const validateForm = () => {
-    if (photoFiles.length === 0) return "Добавьте хотя бы одно фото";
-    if (!formState.name.trim()) return "Введите название автомобиля";
-    if (!formState.price.trim()) return "Введите цену";
-    if (formState.price && !/^\d+(\.\d+)?$/.test(formState.price.trim())) return "Цена должна быть числом";
-    if (formState.vin && formState.vin.trim().length < 10) return "VIN должен содержать минимум 10 символов";
+    if (photoFiles.length === 0) return "Add at least one photo";
+    if (!formState.name.trim()) return "Enter the name of the vehicle";
+    if (!formState.price.trim()) return "Enter the price";
+    if (formState.price && !/^\d+(\.\d+)?$/.test(formState.price.trim())) return "The price must be a number.";
+    if (formState.vin && formState.vin.trim().length < 10) return "VIN must contain at least 10 characters";
     return null;
   };
 
@@ -185,10 +185,10 @@ const AdminPanel = () => {
         city: formState.city,
       });
 
-      setFormSuccess("Автомобиль создан и отправлен на бекенд");
+      setFormSuccess("The car was created and sent to the backend.");
       resetForm();
     } catch (e) {
-      setFormError(e instanceof Error ? e.message : "Не удалось отправить данные");
+      setFormError(e instanceof Error ? e.message : "Failed to send data");
     } finally {
       setSubmitting(false);
     }
@@ -207,13 +207,13 @@ const AdminPanel = () => {
           <>
             <div className={styles.tabs} role="tablist" aria-label="Admin panel tabs">
               <button type="button" role="tab" aria-selected={activeTab === TABS.LEADS} className={`${styles.tabButton} ${activeTab === TABS.LEADS ? styles.tabButtonActive : ""}`} onClick={() => setActiveTab(TABS.LEADS)}>
-                Лиды
+                Leads
               </button>
               <button type="button" role="tab" aria-selected={activeTab === TABS.ADD_CAR} className={`${styles.tabButton} ${activeTab === TABS.ADD_CAR ? styles.tabButtonActive : ""}`} onClick={() => setActiveTab(TABS.ADD_CAR)}>
-                Добавить автомобиль
+                Add a vehicle
               </button>
               <button type="button" role="tab" aria-selected={activeTab === TABS.TEST} className={`${styles.tabButton} ${activeTab === TABS.TEST ? styles.tabButtonActive : ""}`} onClick={() => setActiveTab(TABS.TEST)}>
-                Тестовый таб
+                Test tab
               </button>
             </div>
 
@@ -267,29 +267,29 @@ const AdminPanel = () => {
 
             {activeTab === TABS.ADD_CAR && (
               <form className={styles.form} onSubmit={handleSubmit} noValidate>
-                <p className={styles.formHint}>Заполните данные автомобиля. Фотографии загружаются с вашего компьютера.</p>
+                <p className={styles.formHint}>Fill in the vehicle details. Photos are uploaded from your computer.</p>
 
                 {formError && <div className={styles.error}>{formError}</div>}
                 {formSuccess && <div className={styles.success}>{formSuccess}</div>}
 
                 <label className={styles.formField}>
-                  <span>Фото (до 5)</span>
+                  <span>Photos (up to 5)</span>
                   <input type="file" accept="image/*" multiple onChange={(e) => handlePhotosChange(e.target.files)} />
-                  {photoFiles.length > 0 && <small className={styles.formHelp}>Выбрано файлов: {photoFiles.length}</small>}
+                  {photoFiles.length > 0 && <small className={styles.formHelp}>Files selected: {photoFiles.length}</small>}
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Название автомобиля</span>
-                  <input type="text" placeholder="Например, Porsche 911 (992) Carrera GTS" value={formState.name} onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))} />
+                  <span>Vehicle name</span>
+                  <input type="text" placeholder="For example, Porsche 911 (992) Carrera GTS" value={formState.name} onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Цена</span>
-                  <input type="text" placeholder="Например, 139900" value={formState.price} onChange={(e) => setFormState((s) => ({ ...s, price: e.target.value }))} />
+                  <span>Price</span>
+                  <input type="text" placeholder="For example, 139900" value={formState.price} onChange={(e) => setFormState((s) => ({ ...s, price: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Статус</span>
+                  <span>Status</span>
                   <select value={formState.status} onChange={(e) => setFormState((s) => ({ ...s, status: e.target.value }))}>
                     <option value="IN STOCK">IN STOCK</option>
                     <option value="SOLD">SOLD</option>
@@ -298,102 +298,102 @@ const AdminPanel = () => {
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Лот</span>
-                  <input type="text" placeholder="Например, EU-SPORT-992-01421" value={formState.lot} onChange={(e) => setFormState((s) => ({ ...s, lot: e.target.value }))} />
+                  <span>Lot</span>
+                  <input type="text" placeholder="For example, EU-SPORT-992-01421" value={formState.lot} onChange={(e) => setFormState((s) => ({ ...s, lot: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
                   <span>VIN</span>
-                  <input type="text" placeholder="Например, WP0AB2A920N21S2Q3456" value={formState.vin} onChange={(e) => setFormState((s) => ({ ...s, vin: e.target.value }))} />
+                  <input type="text" placeholder="For example, WP0AB2A920N21S2Q3456" value={formState.vin} onChange={(e) => setFormState((s) => ({ ...s, vin: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Год</span>
-                  <input type="text" placeholder="Например, 2022" value={formState.year} onChange={(e) => setFormState((s) => ({ ...s, year: e.target.value }))} />
+                  <span>Year</span>
+                  <input type="text" placeholder="For example, 2022" value={formState.year} onChange={(e) => setFormState((s) => ({ ...s, year: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Пробег (км)</span>
-                  <input type="text" placeholder="Например, 18500" value={formState.mileage} onChange={(e) => setFormState((s) => ({ ...s, mileage: e.target.value }))} />
+                  <span>Mileage (km)</span>
+                  <input type="text" placeholder="For example, 18500" value={formState.mileage} onChange={(e) => setFormState((s) => ({ ...s, mileage: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Тип кузова</span>
-                  <input type="text" placeholder="Например, Coupe" value={formState.body} onChange={(e) => setFormState((s) => ({ ...s, body: e.target.value }))} />
+                  <span>Body type</span>
+                  <input type="text" placeholder="For example, Coupe" value={formState.body} onChange={(e) => setFormState((s) => ({ ...s, body: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Мест</span>
-                  <input type="text" placeholder="Например, 4" value={formState.seats} onChange={(e) => setFormState((s) => ({ ...s, seats: e.target.value }))} />
+                  <span>Seats</span>
+                  <input type="text" placeholder="For example, 4" value={formState.seats} onChange={(e) => setFormState((s) => ({ ...s, seats: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Топливо</span>
-                  <input type="text" placeholder="Например, Petrol" value={formState.fuel} onChange={(e) => setFormState((s) => ({ ...s, fuel: e.target.value }))} />
+                  <span>Fuel</span>
+                  <input type="text" placeholder="For example, Petrol" value={formState.fuel} onChange={(e) => setFormState((s) => ({ ...s, fuel: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Двигатель</span>
-                  <input type="text" placeholder="Например, 3.0T" value={formState.engine} onChange={(e) => setFormState((s) => ({ ...s, engine: e.target.value }))} />
+                  <span>Engine</span>
+                  <input type="text" placeholder="For example, 3.0T" value={formState.engine} onChange={(e) => setFormState((s) => ({ ...s, engine: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Привод</span>
-                  <input type="text" placeholder="Например, RWD" value={formState.drive} onChange={(e) => setFormState((s) => ({ ...s, drive: e.target.value }))} />
+                  <span>Drivetrain</span>
+                  <input type="text" placeholder="For example, RWD" value={formState.drive} onChange={(e) => setFormState((s) => ({ ...s, drive: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Коробка передач</span>
-                  <input type="text" placeholder="Например, Automatic" value={formState.transmission} onChange={(e) => setFormState((s) => ({ ...s, transmission: e.target.value }))} />
+                  <span>Transmission</span>
+                  <input type="text" placeholder="For example, Automatic" value={formState.transmission} onChange={(e) => setFormState((s) => ({ ...s, transmission: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Цвет</span>
-                  <input type="text" placeholder="Например, Grey" value={formState.color} onChange={(e) => setFormState((s) => ({ ...s, color: e.target.value }))} />
+                  <span>Color</span>
+                  <input type="text" placeholder="For example, Grey" value={formState.color} onChange={(e) => setFormState((s) => ({ ...s, color: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Страна</span>
-                  <input type="text" placeholder="Например, Germany" value={formState.country} onChange={(e) => setFormState((s) => ({ ...s, country: e.target.value }))} />
+                  <span>Country</span>
+                  <input type="text" placeholder="For example, Germany" value={formState.country} onChange={(e) => setFormState((s) => ({ ...s, country: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Штат / Регион</span>
-                  <input type="text" placeholder="Например, Bavaria" value={formState.state} onChange={(e) => setFormState((s) => ({ ...s, state: e.target.value }))} />
+                  <span>State / Region</span>
+                  <input type="text" placeholder="For example, Bavaria" value={formState.state} onChange={(e) => setFormState((s) => ({ ...s, state: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Город</span>
-                  <input type="text" placeholder="Например, Munich" value={formState.city} onChange={(e) => setFormState((s) => ({ ...s, city: e.target.value }))} />
+                  <span>City</span>
+                  <input type="text" placeholder="For example, Munich" value={formState.city} onChange={(e) => setFormState((s) => ({ ...s, city: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Владельцев</span>
-                  <input type="text" placeholder="Например, 1" value={formState.owners} onChange={(e) => setFormState((s) => ({ ...s, owners: e.target.value }))} />
+                  <span>Owners</span>
+                  <input type="text" placeholder="For example, 1" value={formState.owners} onChange={(e) => setFormState((s) => ({ ...s, owners: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Аукцион / Источник</span>
-                  <input type="text" placeholder="Например, Dealer stock" value={formState.auction} onChange={(e) => setFormState((s) => ({ ...s, auction: e.target.value }))} />
+                  <span>Auction / Source</span>
+                  <input type="text" placeholder="For example, Dealer stock" value={formState.auction} onChange={(e) => setFormState((s) => ({ ...s, auction: e.target.value }))} />
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Комплектация</span>
-                  <textarea rows={3} placeholder="Например, ABS, ESP, Sport Chrono, Heated Seats..." value={formState.equipment} onChange={(e) => setFormState((s) => ({ ...s, equipment: e.target.value }))} />
-                  <small className={styles.formHelp}>Перечислите через запятую.</small>
+                  <span>Equipment</span>
+                  <textarea rows={3} placeholder="For example, ABS, ESP, Sport Chrono, Heated Seats..." value={formState.equipment} onChange={(e) => setFormState((s) => ({ ...s, equipment: e.target.value }))} />
+                  <small className={styles.formHelp}>List items separated by commas.</small>
                 </label>
 
                 <label className={styles.formField}>
-                  <span>Описание</span>
-                  <textarea rows={4} placeholder="Краткое описание..." value={formState.description} onChange={(e) => setFormState((s) => ({ ...s, description: e.target.value }))} />
+                  <span>Description</span>
+                  <textarea rows={4} placeholder="Short description..." value={formState.description} onChange={(e) => setFormState((s) => ({ ...s, description: e.target.value }))} />
                 </label>
                 <button className={styles.buttonAdd} type="submit" disabled={submitting}>
-                  {submitting ? "Отправка..." : "Добавить"}
+                  {submitting ? "Submitting..." : "Add"}
                 </button>
               </form>
             )}
 
-            {activeTab === TABS.TEST && <div className={styles.testTab}>Произвольный контент для тестовой вкладки.</div>}
+            {activeTab === TABS.TEST && <div className={styles.testTab}>Arbitrary content for the test tab.</div>}
           </>
         )}
       </div>

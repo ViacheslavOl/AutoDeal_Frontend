@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import { normalizeEmail, validateEmail } from "../../utils/validation";
 import { sendLead } from "../api/leads.api";
 import { getCarById, type CarDetails } from "../api/cars.api";
+import { withBackendUrl } from "../../utils/media";
 
 type Step = "form" | "thanks";
 
@@ -107,7 +108,7 @@ const Card = () => {
 
   const photos = useMemo(() => {
     if (!car) return [];
-    return [car.photo1, car.photo2, car.photo3, car.photo4, car.photo5].filter((x): x is string => typeof x === "string" && x.length > 0);
+    return [car.photo1, car.photo2, car.photo3, car.photo4, car.photo5].filter((x): x is string => typeof x === "string" && x.length > 0).map(withBackendUrl);
   }, [car]);
 
   if (loading) return <div className={styles.container}>Loading...</div>;

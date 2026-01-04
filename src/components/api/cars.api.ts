@@ -147,7 +147,7 @@ export const createCar = async (input: CreateCarInput) => {
 
   const equipment = input.equipment?.map((item) => item.trim()).filter(Boolean);
   if (equipment && equipment.length > 0) {
-    formData.append("equipment", JSON.stringify(equipment));
+    equipment.forEach((item) => formData.append("equipment[]", item));
   }
 
   const res = await fetch(`${BACKEND}/cars/`, {

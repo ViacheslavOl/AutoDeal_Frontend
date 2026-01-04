@@ -6,6 +6,7 @@ import { getCars, getFilteredCars, type CarListItem } from "../api/cars.api";
 import { sendLead } from "../api/leads.api";
 import { normalizeEmail, validateEmail } from "../../utils/validation";
 import { Modal } from "../Ui/Modal/Modal";
+import { firstPhotoUrl } from "../../utils/media";
 
 type ContactStep = "form" | "thanks";
 const PAGE_SIZE = 9;
@@ -168,7 +169,7 @@ const CarsCatalogPage = () => {
         ) : (
           <div className={styles.grid}>
             {cars.map((car) => {
-              const image = car.photo1 || car.photo2 || car.photo3 || car.photo4 || car.photo5 || "";
+              const image = firstPhotoUrl(car.photo1, car.photo2, car.photo3, car.photo4, car.photo5);
               const title = car.name ?? "Untitled";
               const desc = car.description ?? "";
               const year = car.year ?? "—";

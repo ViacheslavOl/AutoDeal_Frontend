@@ -5,6 +5,7 @@ import { getCars, type CarListItem } from "../api/cars.api";
 import { sendLead } from "../api/leads.api";
 import { Modal } from "../Ui/Modal/Modal";
 import { normalizeEmail, validateEmail } from "../../utils/validation";
+import { firstPhotoUrl } from "../../utils/media";
 
 type Step = "form" | "thanks";
 
@@ -105,10 +106,9 @@ const Catalog = () => {
 
         <div className={styles.grid}>
           {cars.map((car) => {
-            const image = car.photo1 || car.photo2 || car.photo3 || car.photo4 || car.photo5 || "";
+            const image = firstPhotoUrl(car.photo1, car.photo2, car.photo3, car.photo4, car.photo5);
             const title = car.name ?? "Untitled";
             const desc = car.description ?? "";
-
             const year = car.year ?? "—";
             const mileage = car.mileage ?? "—";
             const fuel = car.fuel ?? "—";
