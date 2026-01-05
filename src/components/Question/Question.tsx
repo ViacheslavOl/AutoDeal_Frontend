@@ -52,10 +52,9 @@ const Question = () => {
 
       await sendLead({
         type: "FREE_CONSULTATION",
-        name: form.name.trim(),
         email: form.email.trim(),
         consultant: form.consultant,
-        time: form.time,
+        preferredTime: form.time,
       });
 
       setOpen(true);

@@ -39,20 +39,14 @@ const CarSelection = () => {
     const emailError = validateEmail(form.email);
     if (emailError) return setError(emailError);
 
-    if (!form.carMake) return setError("Select a car make");
-    if (!form.carBody) return setError("Select a car body");
-    if (!form.carBudget) return setError("Select a car budget");
-
     try {
       setIsSubmitting(true);
 
       await sendLead({
         type: "CAR_SEARCH",
         email: form.email.trim(),
-        carMake: form.carMake,
-        carBody: form.carBody,
-        carBudget: form.carBudget,
       });
+
       setOpen(true);
       setForm(INITIAL_FORM);
       setError(null);

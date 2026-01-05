@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { withBackendUrl } from "../../utils/media";
 
 export type Consultant = {
   id: string;
@@ -8,7 +9,8 @@ export type Consultant = {
 };
 
 const BACKEND = process.env.REACT_APP_BACKEND ?? "http://localhost:8000";
-const CONSULTANT_ENDPOINTS = [`${BACKEND}/consultants/right`, `${BACKEND}/consultants/left`];
+const CONSULTANT_ENDPOINTS = [`${BACKEND}/consultants/left`, `${BACKEND}/consultants/right`];
+
 let cachedConsultants: Consultant[] | null = null;
 let pendingRequest: Promise<Consultant[]> | null = null;
 
@@ -26,16 +28,16 @@ export const fetchConsultants = async (): Promise<Consultant[]> => {
             throw new Error(text || `Request failed: ${res.status}`);
           }
 
-          const data = (await res.json()) as Consultant[];
-          return data;
+          const data = (await res.json()) as any;
+          return Array.isArray(data) ? data : [data];
         })
       );
 
-      const consultants = responses.flat().map((consultant, index) => ({
+      const consultants = responses.flat().map((consultant: any, index: number) => ({
         id: consultant.id || consultant.name || `consultant-${index}`,
         name: consultant.name || "Consultant",
-        role: consultant.role || "Consultant",
-        photo: consultant.photo || "",
+        role: consultant.role || consultant.title || "Consultant",
+        photo: consultant.photo ? withBackendUrl(consultant.photo) : "",
       }));
 
       cachedConsultants = consultants;
@@ -70,9 +72,7 @@ export const useConsultants = () => {
           setError(err instanceof Error ? err.message : "Failed to load consultants");
         }
       } finally {
-        if (active) {
-          setIsLoading(false);
-        }
+        if (active) setIsLoading(false);
       }
     };
 

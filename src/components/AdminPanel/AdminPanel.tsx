@@ -3,11 +3,12 @@ import styles from "./AdminPanel.module.scss";
 import { isAdmin, isAuthenticated, subscribeAuthChange } from "../../utils/auth";
 import { getLeads, type Lead } from "../api/leads.api";
 import { createCar } from "../api/cars.api";
+import { updateConsultant, type ConsultantPosition } from "../api/consultants.api";
 
 const TABS = {
   LEADS: "leads",
   ADD_CAR: "addCar",
-  TEST: "test",
+  CONSULTANTS: "consultants",
 } as const;
 
 type TabKey = (typeof TABS)[keyof typeof TABS];
@@ -25,6 +26,20 @@ const AdminPanel = () => {
     authed: isAuthenticated(),
     admin: isAdmin(),
   }));
+  const [consultantForm, setConsultantForm] = useState<{
+    position: ConsultantPosition;
+    name: string;
+    title: string;
+    photo: File | null;
+  }>({
+    position: "right",
+    name: "",
+    title: "",
+    photo: null,
+  });
+  const [consultantSubmitting, setConsultantSubmitting] = useState(false);
+  const [consultantSuccess, setConsultantSuccess] = useState<string | null>(null);
+  const [consultantError, setConsultantError] = useState<string | null>(null);
 
   useEffect(() => {
     const unsubscribe = subscribeAuthChange(() =>
@@ -142,6 +157,18 @@ const AdminPanel = () => {
     return null;
   };
 
+  const validateConsultantForm = () => {
+    const name = consultantForm.name.trim();
+    const title = consultantForm.title.trim();
+
+    if (!name && !title && !consultantForm.photo) return "Fill at least one field to update";
+    if (name && name.length < 2) return "Name must be at least 2 characters long";
+    if (name && name.length > 80) return "Name is too long (max 80 characters)";
+    if (title && title.length < 2) return "Title must be at least 2 characters long";
+    if (title && title.length > 120) return "Title is too long (max 120 characters)";
+    return null;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError(null);
@@ -194,6 +221,34 @@ const AdminPanel = () => {
     }
   };
 
+  const handleConsultantSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setConsultantError(null);
+    setConsultantSuccess(null);
+
+    const validationError = validateConsultantForm();
+    if (validationError) {
+      setConsultantError(validationError);
+      return;
+    }
+
+    try {
+      setConsultantSubmitting(true);
+      await updateConsultant(consultantForm.position, {
+        name: consultantForm.name.trim() || undefined,
+        title: consultantForm.title.trim() || undefined,
+        photo: consultantForm.photo,
+      });
+
+      setConsultantSuccess("Consultant updated successfully.");
+      setConsultantForm((prev) => ({ ...prev, name: "", title: "", photo: null }));
+    } catch (e) {
+      setConsultantError(e instanceof Error ? e.message : "Failed to update consultant");
+    } finally {
+      setConsultantSubmitting(false);
+    }
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.card}>
@@ -212,8 +267,8 @@ const AdminPanel = () => {
               <button type="button" role="tab" aria-selected={activeTab === TABS.ADD_CAR} className={`${styles.tabButton} ${activeTab === TABS.ADD_CAR ? styles.tabButtonActive : ""}`} onClick={() => setActiveTab(TABS.ADD_CAR)}>
                 Add a vehicle
               </button>
-              <button type="button" role="tab" aria-selected={activeTab === TABS.TEST} className={`${styles.tabButton} ${activeTab === TABS.TEST ? styles.tabButtonActive : ""}`} onClick={() => setActiveTab(TABS.TEST)}>
-                Test tab
+              <button type="button" role="tab" aria-selected={activeTab === TABS.CONSULTANTS} className={`${styles.tabButton} ${activeTab === TABS.CONSULTANTS ? styles.tabButtonActive : ""}`} onClick={() => setActiveTab(TABS.CONSULTANTS)}>
+                Consultants
               </button>
             </div>
 
@@ -232,7 +287,6 @@ const AdminPanel = () => {
                       <tr>
                         <th>Type</th>
                         <th>Email</th>
-                        <th>Name</th>
                         <th>Consultant</th>
                         <th>Preferred time</th>
                         <th>Car</th>
@@ -244,7 +298,6 @@ const AdminPanel = () => {
                         <tr key={l.id}>
                           <td className={styles.type}>{l.type}</td>
                           <td>{l.email}</td>
-                          <td>{l.name ?? "-"}</td>
                           <td>{l.consultant ?? "-"}</td>
                           <td>{l.preferredTime ?? "-"}</td>
                           <td>{renderCar(l)}</td>
@@ -393,7 +446,51 @@ const AdminPanel = () => {
               </form>
             )}
 
-            {activeTab === TABS.TEST && <div className={styles.testTab}>Arbitrary content for the test tab.</div>}
+            {activeTab === TABS.CONSULTANTS && (
+              <form className={`${styles.form} ${styles.consultantTab}`} onSubmit={handleConsultantSubmit}>
+                <p className={styles.formHint}>Update consultant details. Leave empty fields to keep current values.</p>
+                {consultantError && <div className={styles.error}>{consultantError}</div>}
+                {consultantSuccess && <div className={styles.success}>{consultantSuccess}</div>}
+
+                <label className={styles.formField}>
+                  <span>Select consultant</span>
+                  <select
+                    value={consultantForm.position}
+                    onChange={(e) =>
+                      setConsultantForm((s) => ({
+                        ...s,
+                        position: e.target.value as ConsultantPosition,
+                      }))
+                    }
+                  >
+                    <option value="right">Right consultant</option>
+                    <option value="left">Left consultant</option>
+                  </select>
+                </label>
+
+                <label className={styles.formField}>
+                  <span>Name</span>
+                  <input type="text" placeholder="Enter name" value={consultantForm.name} onChange={(e) => setConsultantForm((s) => ({ ...s, name: e.target.value }))} />
+                  <small className={styles.formHelp}>2-80 characters.</small>
+                </label>
+
+                <label className={styles.formField}>
+                  <span>Title</span>
+                  <input type="text" placeholder="Enter title" value={consultantForm.title} onChange={(e) => setConsultantForm((s) => ({ ...s, title: e.target.value }))} />
+                  <small className={styles.formHelp}>2-120 characters.</small>
+                </label>
+
+                <label className={styles.formField}>
+                  <span>Photo</span>
+                  <input type="file" accept="image/*" onChange={(e) => setConsultantForm((s) => ({ ...s, photo: e.target.files?.[0] ?? null }))} />
+                  <small className={styles.formHelp}>Optional. Replaces existing photo.</small>
+                </label>
+
+                <button className={styles.buttonAdd} type="submit" disabled={consultantSubmitting}>
+                  {consultantSubmitting ? "Updating..." : "Update"}
+                </button>
+              </form>
+            )}
           </>
         )}
       </div>

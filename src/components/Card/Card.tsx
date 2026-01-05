@@ -69,6 +69,7 @@ const Card = () => {
       await sendLead({
         type: "CAR_CONTACT",
         email: normalizeEmail(email),
+        carTitle: car?.name ?? undefined,
       });
 
       setStep("thanks");

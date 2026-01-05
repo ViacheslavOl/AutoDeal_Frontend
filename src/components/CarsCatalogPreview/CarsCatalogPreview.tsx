@@ -60,6 +60,7 @@ const Catalog = () => {
       await sendLead({
         type: "CAR_CONTACT",
         email: normalizeEmail(email),
+        carTitle: selectedCar?.name ?? undefined,
       });
 
       setStep("thanks");

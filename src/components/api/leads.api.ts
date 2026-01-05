@@ -8,10 +8,8 @@ export type SendLeadInput = {
   email: string;
   name?: string;
   consultant?: string;
-  time?: string;
-  carMake?: string;
-  carBody?: string;
-  carBudget?: string;
+  preferredTime?: string;
+  carTitle?: string;
 };
 export type Lead = {
   id: string;
@@ -31,12 +29,9 @@ export const sendLead = async (input: SendLeadInput) => {
   const payload = {
     type: input.type,
     email: input.email.trim(),
-    name: input.name?.trim() || undefined,
-    consultant: input.consultant || undefined,
-    time: input.time || undefined,
-    carMake: input.carMake || undefined,
-    carBody: input.carBody || undefined,
-    carBudget: input.carBudget || undefined,
+    consultant: input.consultant?.trim() || undefined,
+    preferredTime: input.preferredTime?.trim() || undefined,
+    carTitle: input.carTitle?.trim() || undefined,
   };
 
   const res = await fetch(`${BACKEND}/leads/`, {

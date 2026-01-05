@@ -83,6 +83,7 @@ const CarsCatalogPage = () => {
       await sendLead({
         type: "CAR_CONTACT",
         email: normalizeEmail(email),
+        carTitle: selectedCar?.name ?? undefined,
       });
 
       setContactStep("thanks");
