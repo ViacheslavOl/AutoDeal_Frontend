@@ -4,7 +4,9 @@
 .review {
   width: 100%;
   overflow-x: hidden;
-  background: url("../../assets/reviewsBackX2.jpg") center / cover no-repeat;
+  background: center / cover no-repeat;
+  background-image: -webkit-image-set(url("../../assets/review/reviewBack1920X1.jpg") 1x, url("../../assets/review/reviewBack1920X2.jpg") 2x);
+  background-image: image-set(url("../../assets/review/reviewBack1920X1.jpg") 1x, url("../../assets/review/reviewBack1920X2.jpg") 2x);
 }
 .line {
   height: 0.25rem;
@@ -153,4 +155,55 @@
   flex: 1;
   min-width: 0;
   padding: 0.625rem;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    padding: 2rem 3rem 3rem 3rem;
+  }
+  .review {
+    background-image: -webkit-image-set(url("../../assets/review/reviewBack1200X1.jpg") 1x, url("../../assets/review/reviewBack1200X2.jpg") 2x);
+    background-image: image-set(url("../../assets/review/reviewBack1200X1.jpg") 1x, url("../../assets/review/reviewBack1200X2.jpg") 2x);
+  }
+}
+
+@media (max-width: 600px) {
+  .review {
+    background-image: -webkit-image-set(url("../../assets/review/reviewBack800X1.jpg") 1x, url("../../assets/review/reviewBack800X2.jpg") 2x);
+    background-image: image-set(url("../../assets/review/reviewBack800X1.jpg") 1x, url("../../assets/review/reviewBack800X2.jpg") 2x);
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+  .sliderRow {
+    gap: 0rem;
+  }
+
+  .swiper {
+    padding: 0rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-weight: v.$weight-400;
+  }
+  .container {
+    padding: 1rem 2rem 2rem 2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .name {
+    font-size: 0.9rem;
+  }
+
+  .text {
+    font-size: 0.9rem;
+  }
+
+  .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }

@@ -3,7 +3,10 @@
 
 .advantage {
   width: 100%;
-  background: url("../../assets/advantageBackX2.jpg") center / cover no-repeat;
+  background: center / cover no-repeat;
+  background-image: -webkit-image-set(url("../../assets/advantage/advantageBack1920X1.jpg") 1x, url("../../assets/advantage/advantageBack1920X2.jpg") 2x);
+
+  background-image: image-set(url("../../assets/advantage/advantageBack1920X1.jpg") 1x, url("../../assets/advantage/advantageBack1920X2.jpg") 2x);
 }
 .container {
   @include m.container;
@@ -64,4 +67,50 @@
   transform: translateY(-2px);
   transition: transform 180ms ease, box-shadow 180ms ease;
   box-shadow: 0 26px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 1000px) {
+  .advantage {
+    background-image: -webkit-image-set(url("../../assets/advantage/advantageBack1200X1.jpg") 1x, url("../../assets/advantage/advantageBack1200X2.jpg") 2x);
+
+    background-image: image-set(url("../../assets/advantage/advantageBack1200X1.jpg") 1x, url("../../assets/advantage/advantageBack1200X2.jpg") 2x);
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 775px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 2rem 3rem 3rem 3rem;
+  }
+  .advantage {
+    background-image: -webkit-image-set(url("../../assets/advantage/advantageBack800X1.jpg") 1x, url("../../assets/advantage/advantageBack800X2.jpg") 2x);
+
+    background-image: image-set(url("../../assets/advantage/advantageBack800X1.jpg") 1x, url("../../assets/advantage/advantageBack800X2.jpg") 2x);
+  }
+}
+
+@media (max-width: 500px) {
+  .title {
+    font-size: 1.8rem;
+  }
+  .container {
+    padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .title {
+    font-weight: v.$weight-400;
+  }
+  .container {
+    padding: 1rem 2rem 2rem 2rem;
+  }
 }

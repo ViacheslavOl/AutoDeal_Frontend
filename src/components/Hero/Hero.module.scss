@@ -4,15 +4,12 @@
 .hero {
   min-height: 100vh;
   width: 100%;
-  background: url("../../assets/mainBackX2.png") center / cover no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 7rem 5rem;
-}
+  background: center / cover no-repeat;
 
-.container {
-  @include m.container;
+  background-image: -webkit-image-set(url("../../assets/hero/mainBack1920X1.jpg") 1x, url("../../assets/hero/mainBack1920X2.jpg") 2x, url("../../assets/hero/mainBack1920X3.jpg") 3x);
+
+  background-image: image-set(url("../../assets/hero/mainBack1920X1.jpg") 1x, url("../../assets/hero/mainBack1920X2.jpg") 2x, url("../../assets/hero/mainBack1920X3.jpg") 3x);
+  padding: 9rem 7rem;
 }
 
 .error {
@@ -21,7 +18,7 @@
 
 .modalButtonContainer {
   @include m.flexCenter;
-  gap: 10px;
+  gap: 0.8rem;
 }
 
 .modal {
@@ -117,4 +114,72 @@
   margin-top: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
+}
+@media (max-width: 1000px) {
+  .hero {
+    background-image: -webkit-image-set(url("../../assets/hero/mainBack1200X1.jpg") 1x, url("../../assets/hero/mainBack1200X2.jpg") 2x, url("../../assets/hero/mainBack1200X3.jpg") 3x);
+
+    background-image: image-set(url("../../assets/hero/mainBack1200X1.jpg") 1x, url("../../assets/hero/mainBack1200X2.jpg") 2x, url("../../assets/hero/mainBack1200X3.jpg") 3x);
+    min-height: 70vh;
+  }
+}
+
+@media (max-width: 850px) {
+  .hero {
+    padding: 10rem 3rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    background-image: -webkit-image-set(url("../../assets/hero/mainBack800X1.jpg") 1x, url("../../assets/hero/mainBack800X2.jpg") 2x, url("../../assets/hero/mainBack800X3.jpg") 3x);
+
+    background-image: image-set(url("../../assets/hero/mainBack800X1.jpg") 1x, url("../../assets/hero/mainBack800X2.jpg") 2x, url("../../assets/hero/mainBack800X3.jpg") 3x);
+  }
+  .container {
+    text-align: center;
+  }
+  .stats {
+    justify-content: center;
+  }
+
+  .button_container img {
+    display: none;
+  }
+  .button_container {
+    margin: 0 auto 3rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+  }
+
+  .title {
+    font-size: 2.3rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .value {
+    font-size: 2.5rem;
+  }
+  .label {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .hero {
+    padding: 8rem 1.5rem;
+  }
+  .title {
+    font-size: 1.9rem;
+  }
 }

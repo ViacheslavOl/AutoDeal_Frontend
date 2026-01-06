@@ -9,9 +9,7 @@ const Navbar = () => {
   const [authState, setAuthState] = useState(() => ({ isLoggedIn: isAuthenticated(), isAdmin: isAdmin() }));
 
   useEffect(() => {
-    const unsubscribe = subscribeAuthChange(() =>
-      setAuthState({ isLoggedIn: isAuthenticated(), isAdmin: isAdmin() })
-    );
+    const unsubscribe = subscribeAuthChange(() => setAuthState({ isLoggedIn: isAuthenticated(), isAdmin: isAdmin() }));
     return unsubscribe;
   }, []);
 
@@ -26,7 +24,7 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav className={styles.nav}>
+      {/* <nav className={styles.nav}>
         <div className={styles.logo}>
           <img src={logo} alt="AutoDeal logo" />
         </div>
@@ -62,7 +60,7 @@ const Navbar = () => {
             {authState.isLoggedIn ? "Exit" : "Sign in"}
           </button>
         </div>
-      </nav>
+      </nav> */}
     </header>
   );
 };
