@@ -59,7 +59,7 @@ const CarSelection = () => {
 
   return (
     <section className={styles.selection}>
-      {/* <div className={styles.line}></div>
+      <div className={styles.line}></div>
       <div className={styles.container}>
         <div className={styles.info}>
           <h2 className={styles.selectionTitle}>Car Selection</h2>
@@ -157,7 +157,7 @@ const CarSelection = () => {
             Close
           </button>
         </div>
-      </Modal> */}
+      </Modal>
     </section>
   );
 };

@@ -5,11 +5,26 @@
   @include m.flexBetween;
   background-color: v.$color-black;
   padding: 0.7rem 5rem;
+  gap: 2rem;
+  position: relative;
+}
+
+.open .menuWrapper {
+  display: flex;
+}
+
+.brand {
+  @include m.flexBetween;
+  gap: 1rem;
+  flex: 0 0 auto;
 }
 
 .menu {
   @include m.flexBetween;
-  width: 31.25rem;
+  flex: 1 1 auto;
+  width: auto;
+  justify-content: center;
+  gap: 2rem;
 
   li {
     font-size: 1rem;
@@ -24,9 +39,117 @@
 .car_finder {
   @include m.glow-button($py: 0.1rem, $px: 1rem, $glow: 0.3);
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .actions {
   display: flex;
   gap: 0.5rem;
+}
+
+.menuWrapper {
+  @include m.flexBetween;
+  gap: 1.25rem;
+  flex: 1 1 auto;
+  justify-content: stretch;
+  min-width: 0;
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 1.925rem;
+  height: 1.925rem;
+  padding: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.35rem;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+
+  span {
+    display: block;
+    height: 0.1875rem;
+    width: 100%;
+    background: v.$color-white;
+    border-radius: 999px;
+    transition: transform 160ms ease, opacity 160ms ease;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.open .burger span:nth-child(1) {
+  transform: translateY(0.4375rem) rotate(45deg);
+}
+
+.open .burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.open .burger span:nth-child(3) {
+  transform: translateY(-0.4375rem) rotate(-45deg);
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    padding: 0.7rem 2rem;
+  }
+
+  .menu {
+    width: auto;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .brand {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+  .nav {
+    padding: 0.7rem 1.25rem 1rem;
+    align-items: flex-start;
+  }
+
+  .menuWrapper {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: v.$color-black;
+    padding: 1rem 1.25rem 1.5rem;
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.25);
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .menu {
+    flex-direction: column;
+    align-items: flex-center;
+    gap: 0.75rem;
+
+    li {
+      margin-top: 0;
+    }
+  }
+
+  .actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .car_finder {
+    width: 100%;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
 }

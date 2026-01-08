@@ -3,7 +3,9 @@
 
 .selection {
   width: 100%;
-  background: url("../../assets/carSelectionBackX2.jpg") center / cover no-repeat;
+  background: center / cover no-repeat;
+  background-image: -webkit-image-set(url("../../assets/carSelection/carSelectionBack1920X1.jpg") 1x, url("../../assets/carSelection/carSelectionBack1920X2.jpg") 2x);
+  background-image: image-set(url("../../assets/carSelection/carSelectionBack1920X1.jpg") 1x, url("../../assets/carSelection/carSelectionBack1920X2.jpg") 2x);
 }
 
 .container {
@@ -34,6 +36,7 @@
   text-align: center;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
   margin-right: 1.25rem;
+  max-width: 31.25rem;
 }
 .accent {
   color: v.$color-orange;
@@ -58,8 +61,9 @@
 }
 
 .survey {
+  width: 100%;
   justify-items: center;
-  width: 31.25rem;
+  max-width: 31.25rem;
   border-radius: 10px;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
   display: grid;
@@ -106,4 +110,56 @@
 .button {
   @include m.glow-button();
   margin-top: 1.25rem;
+}
+
+@media (max-width: 1000px) {
+  .selection {
+    background-image: -webkit-image-set(url("../../assets/carSelection/carSelectionBack1200X1.jpg") 1x, url("../../assets/carSelection/carSelectionBack1200X2.jpg") 2x);
+    background-image: image-set(url("../../assets/carSelection/carSelectionBack1200X1.jpg") 1x, url("../../assets/carSelection/carSelectionBack1200X2.jpg") 2x);
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    display: block;
+    text-align: center;
+  }
+  .info {
+    margin-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+  }
+
+  .survey {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 2rem 3rem 3rem 3rem;
+  }
+
+  @media (max-width: 600px) {
+    .selection {
+      background-image: -webkit-image-set(url("../../assets/carSelection/carSelectionBack800X1.jpg") 1x, url("../../assets/carSelection/carSelectionBack800X2.jpg") 2x);
+      background-image: image-set(url("../../assets/carSelection/carSelectionBack800X1.jpg") 1x, url("../../assets/carSelection/carSelectionBack800X2.jpg") 2x);
+    }
+    .container {
+      padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 1rem 2rem 2rem 2rem;
+  }
 }

@@ -6,6 +6,7 @@ import logo from "../../assets/logoCar.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [authState, setAuthState] = useState(() => ({ isLoggedIn: isAuthenticated(), isAdmin: isAdmin() }));
 
   useEffect(() => {
@@ -14,6 +15,7 @@ const Navbar = () => {
   }, []);
 
   const handleAuthClick = () => {
+    setIsMenuOpen(false);
     if (authState.isLoggedIn) {
       clearAuthToken();
       navigate("/");
@@ -24,41 +26,61 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav className={styles.nav}>
-        <div className={styles.logo}>
-          <img src={logo} alt="AutoDeal logo" />
-        </div>
-        <ul className={styles.menu}>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/catalog">Catalog</a>
-          </li>
-          <li>
-            <a href="/reviews">Reviews</a>
-          </li>
-          <li>
-            <a href="/contacts">Contacts</a>
-          </li>
-          <li>
-            <a href="/consultation">Consultation</a>
-          </li>
-        </ul>
-        <div className={styles.actions}>
-          {authState.isLoggedIn && authState.isAdmin && (
-            <button
-              className={styles.car_finder}
-              onClick={() => {
-                navigate("/admin");
-              }}
-            >
-              Admin panel
-            </button>
-          )}
-          <button className={styles.car_finder} onClick={handleAuthClick}>
-            {authState.isLoggedIn ? "Exit" : "Sign in"}
+      <nav className={`${styles.nav} ${isMenuOpen ? styles.open : ""}`}>
+        <div className={styles.brand}>
+          <div className={styles.logo}>
+            <img src={logo} alt="AutoDeal logo" />
+          </div>
+          <button type="button" className={styles.burger} aria-label="Toggle navigation menu" aria-expanded={isMenuOpen} onClick={() => setIsMenuOpen((prev) => !prev)}>
+            <span />
+            <span />
+            <span />
           </button>
+        </div>
+        <div className={styles.menuWrapper}>
+          <ul className={styles.menu}>
+            <li>
+              <a href="/" onClick={() => setIsMenuOpen(false)}>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="/catalog" onClick={() => setIsMenuOpen(false)}>
+                Catalog
+              </a>
+            </li>
+            <li>
+              <a href="/reviews" onClick={() => setIsMenuOpen(false)}>
+                Reviews
+              </a>
+            </li>
+            <li>
+              <a href="/contacts" onClick={() => setIsMenuOpen(false)}>
+                Contacts
+              </a>
+            </li>
+            <li>
+              <a href="/consultation" onClick={() => setIsMenuOpen(false)}>
+                Consultation
+              </a>
+            </li>
+          </ul>
+          <div className={styles.actions}>
+            {authState.isLoggedIn && authState.isAdmin && (
+              <button
+                className={styles.car_finder}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  navigate("/admin");
+                }}
+              >
+                Admin panel
+              </button>
+            )}
+            <button className={styles.car_finder} onClick={handleAuthClick}>
+              {authState.isLoggedIn ? "Exit" : "Sign in"}
+            </button>
+          </div>
         </div>
       </nav>
     </header>
