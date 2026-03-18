@@ -37,7 +37,7 @@ const Catalog = () => {
       setAuthState({
         authed: isAuthenticated(),
         admin: isAdmin(),
-      })
+      }),
     );
 
     return unsubscribe;
@@ -139,7 +139,7 @@ const Catalog = () => {
       await deleteCarById(carId);
       setCars((prev) => prev.filter((car) => car.id !== carId));
     } catch (e) {
-      setDeleteError(e instanceof Error ? e.message : "Не удалось удалить автомобиль. Попробуйте снова.");
+      setDeleteError(e instanceof Error ? e.message : "Failed to delete the vehicle. Please try again.");
     }
   };
 

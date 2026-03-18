@@ -118,7 +118,6 @@ const getCreateCarFieldErrors = (error: CarsApiError): CarFormErrors => {
 
   return nextErrors;
 };
-
 const validateCarForm = (formState: CarFormState, photoFiles: File[]): CarFormErrors => {
   const errors: CarFormErrors = {};
   const price = formState.price.trim();
@@ -130,25 +129,25 @@ const validateCarForm = (formState: CarFormState, photoFiles: File[]): CarFormEr
   const name = formState.name.trim();
 
   if (photoFiles.length === 0) {
-    errors.photos = "Добавьте хотя бы одну фотографию автомобиля.";
+    errors.photos = "Add at least one vehicle photo.";
   }
 
   if (!name) {
-    errors.name = "Введите название автомобиля.";
+    errors.name = "Enter the vehicle name.";
   } else if (name.length < 2) {
-    errors.name = "Название должно содержать минимум 2 символа.";
+    errors.name = "The vehicle name must contain at least 2 characters.";
   } else if (name.length > 120) {
-    errors.name = "Название слишком длинное — максимум 120 символов.";
+    errors.name = "The vehicle name is too long — maximum 120 characters.";
   }
 
   if (!price) {
-    errors.price = "Введите цену автомобиля.";
+    errors.price = "Enter the vehicle price.";
   } else {
     const parsedPrice = parsePositiveDecimal(price);
     if (parsedPrice == null) {
-      errors.price = "Цена должна быть числом. Используйте только цифры и, при необходимости, точку для копеек.";
+      errors.price = "The price must be a number. Use digits only and, if needed, a decimal point for cents.";
     } else if (parsedPrice <= 0) {
-      errors.price = "Цена должна быть больше 0.";
+      errors.price = "The price must be greater than 0.";
     }
   }
 
@@ -158,43 +157,43 @@ const validateCarForm = (formState: CarFormState, photoFiles: File[]): CarFormEr
 
     const parsedValue = parseNonNegativeInt(rawValue);
     if (parsedValue == null) {
-      errors[field] = `${numericFieldLabels[field]} должно содержать только целые числа.`;
+      errors[field] = `${numericFieldLabels[field]} must contain whole numbers only.`;
     }
   });
 
   if (!errors.year && year) {
     const parsedYear = Number(year);
     if (parsedYear < 1900 || parsedYear > MAX_YEAR) {
-      errors.year = `Год должен быть в диапазоне от 1900 до ${MAX_YEAR}.`;
+      errors.year = `The year must be between 1900 and ${MAX_YEAR}.`;
     }
   }
 
   if (!errors.mileage && mileage) {
     const parsedMileage = Number(mileage);
     if (parsedMileage > 2_000_000) {
-      errors.mileage = "Пробег выглядит некорректно. Укажите значение до 2 000 000 км.";
+      errors.mileage = "The mileage looks incorrect. Enter a value up to 2,000,000 km.";
     }
   }
 
   if (!errors.seats && seats) {
     const parsedSeats = Number(seats);
     if (parsedSeats < 1 || parsedSeats > 99) {
-      errors.seats = "Количество мест должно быть от 1 до 99.";
+      errors.seats = "The number of seats must be between 1 and 99.";
     }
   }
 
   if (!errors.owners && owners) {
     const parsedOwners = Number(owners);
     if (parsedOwners > 99) {
-      errors.owners = "Количество владельцев должно быть не больше 99.";
+      errors.owners = "The number of owners must not exceed 99.";
     }
   }
 
   if (vin) {
     if (vin.length < 10 || vin.length > 17) {
-      errors.vin = "VIN должен содержать от 10 до 17 символов.";
+      errors.vin = "VIN must contain 10 to 17 characters.";
     } else if (!/^[A-HJ-NPR-Z0-9]+$/i.test(vin)) {
-      errors.vin = "VIN может содержать только латинские буквы и цифры без I, O и Q.";
+      errors.vin = "VIN may contain only Latin letters and digits without I, O, and Q.";
     }
   }
 
@@ -236,7 +235,7 @@ const AdminPanel = () => {
       setAuthState({
         authed: isAuthenticated(),
         admin: isAdmin(),
-      })
+      }),
     );
 
     return unsubscribe;
@@ -322,7 +321,8 @@ const AdminPanel = () => {
     setFieldErrors(validationErrors);
 
     if (Object.keys(validationErrors).length > 0) {
-      setFormError("Проверьте форму: исправьте поля с ошибками и попробуйте снова.");
+      setFormError("Please check the form, fix the highlighted fields, and try again.");
+
       return;
     }
 
@@ -358,7 +358,8 @@ const AdminPanel = () => {
         city: trimOrUndefined(formState.city),
       });
 
-      setFormSuccess("Автомобиль успешно добавлен.");
+      setFormSuccess("The vehicle has been added successfully.");
+
       resetForm();
     } catch (e) {
       if (e instanceof CarsApiError) {
@@ -367,7 +368,8 @@ const AdminPanel = () => {
           setFieldErrors((prev) => ({ ...prev, ...apiFieldErrors }));
         }
 
-        const fallbackMessage = e.status >= 500 ? "Бэкенд не смог сохранить автомобиль. Попробуйте еще раз чуть позже." : "Не удалось сохранить автомобиль. Проверьте данные формы.";
+        const fallbackMessage = e.status >= 500 ? "The backend could not save the vehicle. Please try again later." : "Failed to save the vehicle. Please check the form data.";
+
         const detailSummary = Object.entries(e.details)
           .flatMap(([field, messages]) => messages.map((message) => `${formatFieldName(field)}: ${message}`))
           .join(" ");
@@ -511,14 +513,7 @@ const AdminPanel = () => {
 
                 <label className={styles.formField}>
                   <span>Price</span>
-                  <input
-                    type="text"
-                    inputMode="decimal"
-                    placeholder="For example, 139900"
-                    value={formState.price}
-                    onChange={(e) => setFormField("price", decimalOnly(e.target.value))}
-                    aria-invalid={Boolean(fieldErrors.price)}
-                  />
+                  <input type="text" inputMode="decimal" placeholder="For example, 139900" value={formState.price} onChange={(e) => setFormField("price", decimalOnly(e.target.value))} aria-invalid={Boolean(fieldErrors.price)} />
                   <small className={styles.formHelp}>Use only digits, optionally with a decimal point.</small>
                   {renderFieldError("price")}
                 </label>
