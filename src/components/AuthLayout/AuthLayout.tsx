@@ -29,6 +29,7 @@ const AuthLayout = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isRegister = mode === "register";
+  const isRegisterRestricted = isRegister;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,6 +90,22 @@ const AuthLayout = () => {
 
         <form className={styles.inputs} onSubmit={handleSubmit}>
           {isRegister && (
+            <div className={styles.notice}>
+              <p className={styles.noticeText}>
+                Registration is implemented, but restricted in this public demo. Please sign in using the test account below.
+              </p>
+              <div className={styles.credentials}>
+                <p>
+                  <span>Email:</span> demo.admin@gmail.com
+                </p>
+                <p>
+                  <span>Password:</span> demoadmin123
+                </p>
+              </div>
+            </div>
+          )}
+
+          {isRegister && (
             <>
               <input
                 className={styles.input}
@@ -131,7 +148,7 @@ const AuthLayout = () => {
           />
           {errors.password && <p className={styles.error}>{errors.password}</p>}
 
-          <button className={styles.button} type="submit" disabled={isSubmitting}>
+          <button className={styles.button} type="submit" disabled={isSubmitting || isRegisterRestricted}>
             {isSubmitting ? "Submitting..." : isRegister ? "Sign up" : "Sign in"}
           </button>
 

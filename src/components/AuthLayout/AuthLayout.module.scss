@@ -38,10 +38,47 @@
   padding: 1rem;
 }
 
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.noticeText,
+.credentials p {
+  margin: 0;
+  color: v.$color-black;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.noticeText {
+  font-size: 0.95rem;
+}
+
+.credentials {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.credentials span {
+  font-weight: v.$weight-600;
+}
+
 .button {
   @include m.glow-button();
   display: block;
   margin: 0.5rem auto 0;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+  }
 }
 
 .switchText {
@@ -79,12 +116,41 @@
 .modalTitle {
   color: v.$color-black;
 }
+
 .modalSubtitle {
   color: v.$color-black;
   font-weight: v.$weight-400;
   font-size: 0.9rem;
 }
 
-.button {
-  @include m.glow-button();
+@media (max-width: 640px) {
+  .auth {
+    padding: 16px;
+  }
+
+  .container {
+    padding: 0.75rem;
+  }
+
+  .inputs {
+    padding: 0.75rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .notice {
+    padding: 0.875rem;
+  }
+
+  .noticeText,
+  .credentials p,
+  .switchText {
+    font-size: 0.9rem;
+  }
+
+  .button {
+    width: 100%;
+  }
 }
