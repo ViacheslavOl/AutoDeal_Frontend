@@ -7,6 +7,7 @@
   padding: 0.7rem 5rem;
   gap: 2rem;
   position: relative;
+  z-index: 60;
 }
 
 .open .menuWrapper {
@@ -122,6 +123,7 @@
     position: absolute;
     top: 100%;
     left: 0;
+    z-index: 61;
     width: 100%;
     background-color: v.$color-black;
     padding: 1rem 1.25rem 1.5rem;
