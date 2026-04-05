@@ -1,7 +1,7 @@
 # AutoDeal Frontend
 
 **Live Demo:** https://autodeal.business/  
-**Backend Repository:** https://github.com/ViacheslavOl/AutoDeal_Backend  
+**Backend Repository:** https://github.com/slava-oliinyk-dev/AutoDeal_Backend  
 **Backend API:** https://autodealbackend-production.up.railway.app  
 **Screenshots:** See the [Screenshots](#screenshots) section below.
 
